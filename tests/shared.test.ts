@@ -10,7 +10,8 @@ describe('name matching', () => {
   });
   it('supports partial and slightly misspelled names', () => {
     expect(nameMatchesAll('geo vas', ['George Vasquez'])).toBe(true);
-    expect(nameMatchesAll('Jorge Vazquez', ['George Vasquez'])).toBe(false);
+    expect(nameMatchesAll('Jorge Vazquez', ['George Vasquez'])).toBe(true);
+    expect(nameMatchesAll('Jon Smith', ['George Vasquez'])).toBe(false);
     expect(nameMatchesAll('Georgee Vasquez', ['George Vasquez'])).toBe(true);
     expect(nameMatchesAll('Maria', ['Dr. Maria Rodriguez'])).toBe(true);
   });

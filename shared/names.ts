@@ -40,7 +40,7 @@ export function levenshtein(a: string, b: string): number {
 export function tokenMatches(q: string, t: string): boolean {
   if (q === t) return true;
   if (q.length >= 2 && t.startsWith(q)) return true; // partial names while typing
-  const allowed = q.length >= 8 ? 2 : q.length >= 4 ? 1 : 0;
+  const allowed = q.length >= 5 ? 2 : q.length >= 4 ? 1 : 0;
   return allowed > 0 && levenshtein(q, t) <= allowed;
 }
 
