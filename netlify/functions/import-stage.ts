@@ -3,6 +3,7 @@ import { admin } from './_lib/supabase';
 import { HttpError, isUuid, json, readJson, route, str } from './_lib/http';
 import { requireStaff } from './_lib/auth';
 import { limit } from './_lib/rate';
+import { fetchAllRows } from './_lib/page';
 import { classifyRows, normalizeApiSubmission, normalizeCsvRow, type NormalizedGuest } from '../../shared/jotform';
 
 export const config: Config = { path: '/api/import/stage' };
@@ -53,9 +54,8 @@ export default route(['POST'], async (req) => {
     rows = b.rows.map((r: Record<string, string>) => normalizeCsvRow(r));
   } else throw new HttpError(400, 'BAD_REQUEST');
 
-  const { data: existing, error: exErr } = await sb.from('guests').select('*').eq('event_id', ev.id).limit(10000);
-  if (exErr) throw new HttpError(500, 'SERVER_ERROR');
-  const classified = classifyRows(rows, (existing ?? []) as any);
+  const existing = await fetchAllRows((from, to) => sb.from('guests').select('*').eq('event_id', ev.id).order('id').range(from, to));
+  const classified = classifyRows(rows, existing as any);
 
   const counts: Record<string, number> = { total: classified.length, new: 0, updated: 0, unchanged: 0, duplicate: 0, incomplete: 0, error: 0 };
   for (const r of classified) counts[r.classification]++;

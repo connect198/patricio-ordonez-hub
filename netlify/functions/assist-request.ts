@@ -14,7 +14,7 @@ export default route(['POST'], async (req, ctx) => {
   const { data: ev } = await sb.from('events').select('id,status').eq('slug', slug).maybeSingle();
   if (!ev || ev.status === 'draft') throw new HttpError(404, 'EVENT_NOT_FOUND');
   const ip = hashKey(clientIp(req, ctx));
-  await limit(`assist:${ip}`, 12, 600);
+  await limit(`assist:${ip}`, 60, 600);
   await limit(`assist-ev:${ev.id}`, 600, 600);
 
   let guestId: string | null = null;

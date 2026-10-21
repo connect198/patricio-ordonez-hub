@@ -25,8 +25,8 @@ export default route(['POST'], async (req, ctx) => {
   if (!ev || ev.status === 'draft') throw new HttpError(404, 'EVENT_NOT_FOUND', 'We could not find this event.');
 
   // Abuse protection. Venue Wi-Fi shares one IP, so per-IP limits are generous; the per-target and per-event limits do the real work.
-  await limit(`vip:${hashKey(clientIp(req, ctx))}`, 400, 600);
-  await limit(`vev:${ev.id}`, 4000, 600);
+  await limit(`vip:${hashKey(clientIp(req, ctx))}`, 3000, 600);
+  await limit(`vev:${ev.id}`, 8000, 600);
   if (name) await limit(`vname:${ev.id}:${hashKey(normalizeName(name))}`, 12, 600);
 
   const { data: st } = await sb.from('event_settings').select('settings').eq('event_id', ev.id).maybeSingle();

@@ -1,5 +1,5 @@
 // Jotform → guest normalisation and import classification (used by Netlify Functions; unit-tested).
-import { nameTokens, normalizeName } from './names';
+import { normalizeName } from './names';
 
 export interface NormalizedGuest {
   submissionId: string | null;
@@ -206,13 +206,13 @@ export function toGuestColumns(n: NormalizedGuest) {
 }
 
 export function deriveFirstName(fullName: string, displayName: string): string {
-  return nameTokens(fullName)[0] ? properCase(firstRawToken(fullName)) : properCase(firstRawToken(displayName));
+  return firstRawToken(fullName) || firstRawToken(displayName);
 }
 const HON = /^(dr|mr|mrs|ms|miss|rev|pastor|bishop|apostle|prophet|minister|sir)\.?$/i;
 function firstRawToken(s: string): string {
-  return s.split(/\s+/).find((t) => t && !HON.test(t)) ?? s.split(/\s+/)[0] ?? '';
+  const parts = s.split(/\s+/).filter(Boolean);
+  return parts.find((t) => !HON.test(t)) ?? parts[0] ?? '';
 }
-const properCase = (s: string) => s;
 
 /** Only non-empty incoming values overwrite; an empty Jotform answer never erases existing data. */
 export function diffAgainst(existing: Record<string, unknown>, incoming: ReturnType<typeof toGuestColumns>) {

@@ -2,6 +2,7 @@ import type { Config } from '@netlify/functions';
 import { admin } from './_lib/supabase';
 import { HttpError, isUuid, json, readJson, route } from './_lib/http';
 import { requireStaff } from './_lib/auth';
+import { fetchAllRows } from './_lib/page';
 import { toGuestColumns, type NormalizedGuest } from '../../shared/jotform';
 
 export const config: Config = { path: '/api/import/apply' };
@@ -24,13 +25,13 @@ export default route(['POST'], async (req) => {
 
   const result = { created: 0, updated: 0, merged: 0, skipped: 0, failed: 0, errors: [] as string[] };
   try {
-    const { data: rows } = await sb.from('import_rows').select('*').eq('run_id', run.id).limit(10000);
+    const rows = await fetchAllRows((from, to) => sb.from('import_rows').select('*').eq('run_id', run.id).order('row_index').range(from, to));
     const source = run.source === 'csv' ? 'csv' : 'jotform';
     const now = new Date().toISOString();
     const inserts: any[] = [];
     const updates: { id: string; cols: any; sub: string | null }[] = [];
 
-    for (const r of rows ?? []) {
+    for (const r of rows) {
       const n = r.payload as NormalizedGuest;
       if (r.decision === 'skip' || r.classification === 'error' || r.classification === 'unchanged') { result.skipped++; continue; }
       const cols = toGuestColumns(n);
@@ -39,7 +40,7 @@ export default route(['POST'], async (req) => {
       } else if (r.decision === 'merge' && r.matched_guest_id) {
         updates.push({ id: r.matched_guest_id, cols: stripEmpty(cols), sub: r.submission_id });
       } else {
-        inserts.push({ ...cols, event_id: run.event_id, jotform_submission_id: r.submission_id, category: 'finalist', source, import_run_id: run.id, imported_at: now });
+        inserts.push({ ...nullIfEmpty(cols), event_id: run.event_id, jotform_submission_id: r.submission_id, category: 'finalist', source, import_run_id: run.id, imported_at: now });
       }
     }
 
@@ -64,5 +65,6 @@ export default route(['POST'], async (req) => {
   return json(result);
 });
 
+const nullIfEmpty = (o: Record<string, unknown>) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, v === '' ? null : v]));
 const stripEmpty = (o: Record<string, unknown>) =>
   Object.fromEntries(Object.entries(o).filter(([, v]) => !(v === '' || v == null || (Array.isArray(v) && v.length === 0))));

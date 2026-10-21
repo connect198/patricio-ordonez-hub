@@ -11,7 +11,7 @@ export const config: Config = { path: '/api/event' };
 export default route(['GET'], async (req, ctx) => {
   const slug = str(new URL(req.url).searchParams.get('slug'), 80).toLowerCase();
   if (!slug) throw new HttpError(400, 'BAD_REQUEST');
-  await limit(`ev:${hashKey(clientIp(req, ctx))}`, 600, 600);
+  await limit(`ev:${hashKey(clientIp(req, ctx))}`, 3000, 600);
 
   const sb = admin();
   const { data: ev } = await sb.from('events').select('id,slug,name,tagline,event_date,venue,city,is_demo,status').eq('slug', slug).maybeSingle();

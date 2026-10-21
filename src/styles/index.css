@@ -21,6 +21,7 @@
     background-attachment: fixed;
   }
   h1, h2, h3, .serif { @apply font-serif tracking-wide; }
+  .font-serif, h1, h2, h3, .serif { font-variant-numeric: lining-nums; font-feature-settings: 'lnum' 1; }
   :focus-visible { outline: 3px solid #e6c968; outline-offset: 2px; border-radius: 6px; }
   ::selection { background: rgba(212, 175, 55, 0.35); }
   button, [role='button'], select, input[type='checkbox'] { cursor: pointer; }
@@ -90,4 +91,6 @@ html[data-lowbw] body { background-image: none; }
 @media print {
   body { background: #fff !important; color: #000 !important; }
   .no-print { display: none !important; }
+  body[data-print='sign'] .cards-block { display: none !important; }
+  body[data-print='cards'] .sign-block { display: none !important; }
 }
