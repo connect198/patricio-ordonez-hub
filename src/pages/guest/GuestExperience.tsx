@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fillGreeting, type PublicEvent, type VerifiedGuestView } from '../../../shared/types';
 import { ApiError, fetchPublicEvent, requestAssistance, verifyGuest } from '../../lib/api';
 import { Crown, Sparkles } from '../../components/Crown';
+import { GalaBackdrop } from '../../components/GalaBackdrop';
 import { FloorPlan } from '../../components/FloorPlan';
 import { Button, Modal, Field, Input, Textarea, Spinner } from '../../components/ui';
 import { formatDate, isLowBandwidth, setLowBandwidth } from '../../lib/utils';
@@ -101,8 +102,8 @@ export default function GuestExperience() {
 function Shell({ children, event, art, full, lowbw, setLowbw }: { children: React.ReactNode; event?: PublicEvent; art?: string; full?: boolean; lowbw: boolean; setLowbw: (v: boolean) => void }) {
   return (
     <div className="relative min-h-dvh overflow-hidden">
+      <GalaBackdrop />
       {art && <div className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-25" style={{ backgroundImage: `url(${art})` }} aria-hidden="true" />}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[60vh] bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.16),transparent_65%)] fx animate-glow" aria-hidden="true" />
       {event?.isDemo && (
         <div className="relative z-20 bg-amber-300 px-3 py-1.5 text-center text-xs font-bold uppercase tracking-widest text-royal" role="note">
           Demonstration — sample guests only · not a real event
@@ -125,22 +126,24 @@ function Shell({ children, event, art, full, lowbw, setLowbw }: { children: Reac
 // ───────────────────────── Screen 1 ─────────────────────────
 function Arrival({ event, onBegin }: { event: PublicEvent; onBegin: () => void }) {
   const w = event.settings.welcome;
+  const words = w.arrivalHeadline.replace(/\.$/, '').split(' ');
+  const last = words.pop() ?? '';
+  const first = words.join(' ');
   return (
-    <section className="relative grid min-h-[82dvh] place-items-center text-center" aria-labelledby="arrival-h">
-      <Sparkles />
-      <div className="stagger relative grid justify-items-center gap-6">
+    <section className="relative grid min-h-[90dvh] content-center justify-items-center gap-5 text-center" aria-labelledby="arrival-h">
+      <div className="absolute -left-5 top-0"><span className="pill-gold tab-l text-sm sm:text-base">{event.name.replace(/^DEMO — /, '')}</span></div>
+      <div className="stagger relative grid justify-items-center gap-4 pt-16">
         {event.settings.logoUrl
-          ? <img src={event.settings.logoUrl} alt={`${event.name} logo`} className="h-24 w-auto object-contain" />
-          : <Crown className="h-24 w-24 animate-float sm:h-32 sm:w-32" />}
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold-soft sm:text-sm">{event.name}</p>
-        <h1 id="arrival-h" className="gold-text max-w-4xl text-[clamp(2.6rem,9vw,6rem)] font-semibold leading-[1.02]">{w.arrivalHeadline}</h1>
-        <p className="max-w-xl text-lg text-ivory/85 sm:text-xl">{w.arrivalSubheadline.replace('{eventName}', event.name)}</p>
-        <div className="rule-gold w-48" />
-        <Button variant="gold" size="xl" onClick={onBegin} className="min-w-[17rem]">{w.beginLabel}</Button>
-        <p className="text-sm text-ivory/60">
-          {[formatDate(event.eventDate), event.venue, event.city].filter(Boolean).join(' · ')}
-        </p>
+          ? <img src={event.settings.logoUrl} alt={`${event.name} logo`} className="h-20 w-auto object-contain" />
+          : <Crown className="h-16 w-16 animate-float sm:h-20 sm:w-20" />}
+        <h1 id="arrival-h" className="grid gap-0">
+          <span className="script-glow text-[clamp(2.4rem,11.2vw,8.5rem)] whitespace-nowrap">{first}</span>
+          <span className="script-glow -mt-2 text-[clamp(2.2rem,9.5vw,6.5rem)]">{last}.</span>
+        </h1>
+        <p className="pill-gold mt-2 max-w-[92vw] text-base sm:text-xl">{w.arrivalSubheadline.replace('{eventName}', event.name)}</p>
+        <Button variant="gold" size="xl" onClick={onBegin} className="mt-4 min-w-[17rem] !rounded-full">{w.beginLabel}</Button>
       </div>
+      <div className="absolute -right-5 bottom-2"><span className="pill-gold tab-r text-xs sm:text-base">{[formatDate(event.eventDate).replace(/^\w+, /, ''), event.venue].filter(Boolean).join(' · ')}</span></div>
     </section>
   );
 }
@@ -169,7 +172,7 @@ function NameStep({ event, slug, onVerified, onBack, onHelp }: { event: PublicEv
       <button onClick={onBack} className="justify-self-start rounded-lg px-1 py-2 text-sm text-ivory/60 hover:text-ivory">← Back</button>
       <div className="text-center">
         <Crown className="mx-auto mb-4 h-14 w-14" />
-        <h1 id="name-h" className="text-[clamp(2.2rem,7vw,3.6rem)] font-semibold leading-tight">{event.settings.welcome.nameHeadline}</h1>
+        <h1 id="name-h" className="script-glow text-[clamp(3rem,11vw,5.5rem)]">{event.settings.welcome.nameHeadline}</h1>
         <p className="mt-3 text-ivory/70">{event.settings.welcome.nameHelp}</p>
       </div>
       <form onSubmit={submit} className="card-gold grid gap-5 p-6 sm:p-8" noValidate>
@@ -206,8 +209,8 @@ function Welcome({ event, guest, lowbw, onLocation, onProgram, onHelp, onNotMe }
       {celebrate && shown && guest.table && <Sparkles count={26} />}
       <Crown className="h-14 w-14 animate-float" />
       <div className="stagger grid gap-2">
-        <h1 className="gold-text text-[clamp(2.4rem,8vw,4.5rem)] font-semibold leading-tight">{fillGreeting(g.headline, vars)}</h1>
-        <p className="text-lg text-ivory/85 sm:text-xl">{fillGreeting(g.subline, vars)}</p>
+        <h1 className="script-glow text-[clamp(3.2rem,12vw,6rem)]">{fillGreeting(g.headline, vars)}</h1>
+        <p className="pill-gold mx-auto mt-2 text-base sm:text-xl">{fillGreeting(g.subline, vars)}</p>
       </div>
       <div className="rule-gold w-40" />
 
@@ -218,7 +221,7 @@ function Welcome({ event, guest, lowbw, onLocation, onProgram, onHelp, onNotMe }
       {guest.table && (
         <div className={`grid justify-items-center gap-1 ${shown ? 'animate-reveal' : 'opacity-0'}`}>
           <div className="text-sm font-semibold uppercase tracking-[0.4em] text-gold-soft">{s.welcome.tableLabel}</div>
-          <div className="table-number gold-text text-[clamp(8rem,32vw,16rem)]" aria-label={`Table ${guest.table.number}`}>{guest.table.number}</div>
+          <div className="table-number script-glow !font-serif text-[clamp(8rem,32vw,16rem)]" aria-label={`Table ${guest.table.number}`}>{guest.table.number}</div>
           {guest.table.label && <div className="serif text-xl text-ivory/80">{guest.table.label}</div>}
         </div>
       )}

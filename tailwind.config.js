@@ -12,6 +12,7 @@ export default {
       },
       fontFamily: {
         serif: ['"Cormorant Garamond"', 'Cormorant', 'Georgia', 'serif'],
+        script: ['"Great Vibes"', '"Pinyon Script"', 'cursive'],
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       boxShadow: {

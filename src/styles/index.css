@@ -64,6 +64,23 @@
   .td { @apply px-3 py-2.5 text-sm; }
 }
 
+/* Gala look: glowing script, gold pills */
+.script-glow {
+  font-family: 'Great Vibes', 'Pinyon Script', cursive; font-weight: 400; letter-spacing: 0; line-height: 1.05;
+  color: #fff6dc;
+  text-shadow: 0 0 6px rgba(255, 240, 200, .95), 0 0 18px rgba(255, 214, 120, .85), 0 0 42px rgba(212, 175, 55, .65), 0 0 90px rgba(212, 175, 55, .35);
+}
+.pill-gold {
+  display: inline-block; border-radius: 9999px; padding: .55rem 1.6rem; color: #1a1408;
+  font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; letter-spacing: .01em;
+  background: radial-gradient(120% 220% at 50% 0%, #f6dc9a 0%, #e3bd66 55%, #c79a3e 100%);
+  box-shadow: 0 0 22px rgba(212,175,55,.35), inset 0 1px 0 rgba(255,255,255,.45);
+}
+.pill-gold.tab-l { border-radius: 0 9999px 9999px 0; padding-left: 2.2rem; }
+.pill-gold.tab-r { border-radius: 9999px 0 0 9999px; padding-right: 2.2rem; }
+@keyframes twinkle { 0%,100% { opacity: .25 } 50% { opacity: 1 } }
+.twinkle { animation: twinkle 3.5s ease-in-out infinite; }
+
 /* Gentle reveal for stacked content */
 .stagger > * { animation: rise .7s cubic-bezier(.2,.7,.2,1) both; }
 .stagger > *:nth-child(2) { animation-delay: .1s; }
