@@ -25,6 +25,14 @@ Jotform → *Settings → API → Create New Key* (**Read Access** is enough). K
 
 ## 3. Netlify
 
+**How to upload.** Netlify's drag-and-drop box only hosts static files, so it would skip the server functions (verification, import, QR credentials) and the app would not work. Use one of these:
+
+* **Netlify CLI from the ZIP (no GitHub needed):** unzip `kingdom-concierge.zip`, open a terminal in that folder, then `npm install`, `npm i -g netlify-cli`, `netlify login`, `netlify init` (create a new site), add the variables below (`netlify env:set NAME value`), and run `netlify deploy --build --prod`.
+* **Git:** push the folder to a GitHub repo, then Netlify → *Add new site → Import an existing project*. Later pushes redeploy automatically.
+
+Before either, run `npm run check` (typecheck, tests, function bundling, build). All must pass.
+
+
 1. New site → import the Git repository (or drag the ZIP's contents). Build command `npm run build`, publish dir `dist`, functions dir `netlify/functions` (already in `netlify.toml`).
 2. **Site settings → Environment variables**:
 
@@ -52,7 +60,7 @@ Jotform → *Settings → API → Create New Key* (**Read Access** is enough). K
 1. Sign in at `/admin`. **Settings & Team** → set the event to *Draft* until ready, invite managers/staff.
 2. **Import** → *Fetch submissions & preview* (or upload a CSV). Review New / Updated / Possible duplicates / Incomplete / Errors, choose what to include, **Apply**. The 102 finalists arrive as **records** — not confirmed attendees.
 3. **Guests** → set *Attendance → Confirmed* for each finalist/guest who holds a ticket (and add companions, VIPs, speakers, sponsors). Only confirmed guests count toward seating, check-in totals and the guest table reveal.
-4. **Seating** → create tables (bulk-create supported) → drag or use dropdowns to seat guests.
+4. **Seating** → create tables (bulk-create supported) → drag or use dropdowns to seat guests, **or** upload your existing seating chart with *Import seating CSV* (columns: `table` plus `name` or `email`; matched to imported records, nothing is invented).
 5. **Experience Director** → welcome copy, VIP greetings, program, announcements, logo/artwork, optional music (never autoplays), manager phone for staff.
 6. **QR & Credentials** → *Issue credentials* for confirmed guests (export CSV for mail-merge / print cards). Guests without one can still verify with **name + the email they registered with**.
 7. **Settings** → set the event to **Live**. Print the main QR sign from **QR & Credentials**.

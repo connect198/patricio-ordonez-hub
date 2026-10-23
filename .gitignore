@@ -6,3 +6,4 @@ dist
 .netlify
 *.zip
 .DS_Store
+.netlify-check

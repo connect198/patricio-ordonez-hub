@@ -10,6 +10,60 @@
   node_bundler = "esbuild"
 
 [[redirects]]
+  from = "/api/event"
+  to = "/.netlify/functions/event-public"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/verify"
+  to = "/.netlify/functions/guest-verify"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/assist"
+  to = "/.netlify/functions/assist-request"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/credentials/issue"
+  to = "/.netlify/functions/credentials-issue"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/credentials/resolve"
+  to = "/.netlify/functions/credentials-resolve"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/status"
+  to = "/.netlify/functions/server-status"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/import/stage"
+  to = "/.netlify/functions/import-stage"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/import/apply"
+  to = "/.netlify/functions/import-apply"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/team/invite"
+  to = "/.netlify/functions/team-invite"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

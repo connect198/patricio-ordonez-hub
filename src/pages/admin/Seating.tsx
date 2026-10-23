@@ -8,6 +8,7 @@ import { friendly } from '../../lib/db';
 import type { Guest, TableRow } from '../../lib/types';
 import { Badge, Button, Empty, Field, Input, Modal, Select, Textarea } from '../../components/ui';
 import { useToast } from '../../components/Toast';
+import { SeatingImport } from './SeatingImport';
 import { cx } from '../../lib/utils';
 
 const MATCH: Partial<Record<TableDesignation, string[]>> = { finalist: ['finalist'], vip: ['vip', 'distinguished'], speaker: ['speaker'], sponsor: ['sponsor'] };
@@ -34,6 +35,7 @@ export default function Seating() {
   const [pending, setPending] = useState<{ tableId: string; ids: string[]; warnings: string[] } | null>(null);
   const [busy, setBusy] = useState(false);
   const [dragOver, setDragOver] = useState<string | null>(null);
+  const [importing, setImporting] = useState(false);
 
   const unassigned = useMemo(() => {
     const list = d.guests.filter((g) => g.is_confirmed && !d.assignByGuest.has(g.id));
@@ -85,7 +87,7 @@ export default function Seating() {
     <div className="grid gap-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div><h1 className="text-4xl">Royal Seating Designer</h1><p className="text-ivory/60">{d.tables.length} tables · {d.stats.seatsTotal} seats · {d.stats.seated} seated · {d.stats.unassigned} confirmed guests waiting</p></div>
-        <Button variant="gold" onClick={() => setEditing('new')}>+ New table</Button>
+        <div className="flex gap-2"><Button onClick={() => setImporting(true)}>Import seating CSV</Button><Button variant="gold" onClick={() => setEditing('new')}>+ New table</Button></div>
       </div>
 
       {d.issues.length > 0 && (
@@ -167,6 +169,7 @@ export default function Seating() {
         </section>
       </div>
 
+      <SeatingImport open={importing} onClose={() => setImporting(false)} />
       <TableEditor key={editing === 'new' ? 'new' : editing?.id ?? 'none'} open={!!editing} table={editing === 'new' ? null : editing} onClose={() => setEditing(null)} eventId={event!.id} nextNumber={Math.max(0, ...d.tables.map((t) => t.number)) + 1} used={editing && editing !== 'new' ? d.guestsAtTable(editing.id).length : 0} onSaved={() => d.refresh()} />
 
       <Modal open={!!pending} onClose={() => setPending(null)} title="Seat anyway?">

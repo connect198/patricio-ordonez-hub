@@ -11,7 +11,9 @@
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "test": "vitest run",
-    "zip": "bash scripts/make-zip.sh"
+    "zip": "bash scripts/make-zip.sh",
+    "check:functions": "esbuild netlify/functions/*.ts --bundle --platform=node --format=esm --outdir=.netlify-check --log-level=warning && rm -rf .netlify-check",
+    "check": "npm run typecheck && npm test && npm run check:functions && vite build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
