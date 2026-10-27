@@ -1,0 +1,1187 @@
+<title>Kingdom Story Festival</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,100;1,9..144,300..700,100&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout concept: a storybook-meets-wayfinding site. Warm ivory pages, black ink for contrast, restrained gold for moments of emphasis,
+   and seven distinct world colors used only as small identity marks (never as the brand). One scenic hero; everything else stays calm. */
+:root{
+  --bg:#FBF7EE; --bg2:#F3ECDD; --surface:#FFFFFF; --ink:#18140E; --ink2:#5A5246; --line:#E3D9C4;
+  --gold:#C9A24D; --gold-deep:#80610F; --gold-soft:#F4E8C3; --on-gold:#18140E; --focus:#0F5FD6;
+  --sky-a:#FFF8E6; --sky-b:#F9E2B4; --hill-a:#E9D9AE; --hill-b:#D4C08A; --hill-c:#B9A56F; --book:#FFFDF6; --glow:#FFE9A8;
+  --w-faith:#4E8A5B; --w-family:#E0694F; --w-edu:#3A82C4; --w-biz:#D3991A; --w-gov:#2C4573; --w-media:#1B8A84; --w-arts:#B5334E;
+  --ok:#2E7D4F; --warn:#9A5B00; --demo:#0F5FD6;
+  --f-display:'Fraunces','Iowan Old Style','Georgia',serif; --f-body:'Figtree','Segoe UI',system-ui,sans-serif;
+  --shadow:0 1px 2px rgba(60,40,10,.06),0 8px 28px rgba(60,40,10,.08);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14110C; --bg2:#1C1812; --surface:#231E16; --ink:#F6EFDF; --ink2:#BDB29E; --line:#3A3326;
+  --gold:#D9B35F; --gold-deep:#E6C57A; --gold-soft:#3A2F14; --focus:#8CB8FF;
+  --sky-a:#1E1A2A; --sky-b:#3B2C25; --hill-a:#2D2419; --hill-b:#241D14; --hill-c:#1A150F; --book:#F6EAC8; --glow:#7A5E24;
+  --w-faith:#7DBA89; --w-family:#F08C74; --w-edu:#6FAEE6; --w-biz:#E8B84A; --w-gov:#8FA9E0; --w-media:#4CC0B8; --w-arts:#E27088;
+  --ok:#6CC38F; --warn:#E8B25A; --demo:#8CB8FF; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14110C; --bg2:#1C1812; --surface:#231E16; --ink:#F6EFDF; --ink2:#BDB29E; --line:#3A3326;
+  --gold:#D9B35F; --gold-deep:#E6C57A; --gold-soft:#3A2F14; --focus:#8CB8FF;
+  --sky-a:#1E1A2A; --sky-b:#3B2C25; --hill-a:#2D2419; --hill-b:#241D14; --hill-c:#1A150F; --book:#F6EAC8; --glow:#7A5E24;
+  --w-faith:#7DBA89; --w-family:#F08C74; --w-edu:#6FAEE6; --w-biz:#E8B84A; --w-gov:#8FA9E0; --w-media:#4CC0B8; --w-arts:#E27088;
+  --ok:#6CC38F; --warn:#E8B25A; --demo:#8CB8FF; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-padding-top:84px}
+body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--f-body);-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--f-display);font-variation-settings:"SOFT" 100;font-weight:500;line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2.5rem,6.4vw,4.6rem);font-weight:450}
+h2{font-size:clamp(1.9rem,4vw,2.9rem)}
+h3{font-size:1.45rem}
+h4{font-size:1.15rem}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto}
+.narrow{max-width:720px}
+.eyebrow{font:600 .78rem/1 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep)}
+.lede{font-size:1.2rem;color:var(--ink2);max-width:58ch}
+.muted{color:var(--ink2)}
+.small{font-size:.9rem}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:100}
+.skip:focus{left:16px}
+
+/* preview bar */
+.pv{background:var(--ink);color:var(--bg);font-size:.86rem;margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))}
+.pv .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between}
+.pv b{font-weight:700;color:var(--gold)}
+.seg{display:inline-flex;border:1px solid color-mix(in srgb,var(--bg) 40%,transparent);border-radius:999px;overflow:hidden}
+.seg button{background:transparent;color:var(--bg);border:0;font:600 .82rem var(--f-body);padding:8px 14px;min-height:36px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:#18140E}
+:root[data-theme="dark"] .pv,:root:not([data-theme="light"]) .pv{--pvbg:var(--surface)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pv{background:#0c0a07;color:#F6EFDF}.seg button{color:#F6EFDF}}
+:root[data-theme="dark"] .pv{background:#0c0a07;color:#F6EFDF}
+
+/* header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);
+  margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.hdr .wrap{display:flex;align-items:center;gap:20px;min-height:68px}
+.brand{font:500 1.2rem var(--f-display);font-variation-settings:"SOFT" 100;text-decoration:none;display:flex;gap:10px;align-items:center;white-space:nowrap}
+.brand svg{width:30px;height:30px;flex:none}
+.nav{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav a{padding:10px 12px;text-decoration:none;font-weight:500;font-size:.95rem;border-radius:999px;min-height:44px;display:inline-flex;align-items:center}
+.nav a:hover{background:var(--bg2)}
+.nav a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--gold)}
+.menu-btn{display:none;margin-left:auto;background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:999px;min-height:44px;padding:0 16px;font:600 .95rem var(--f-body);cursor:pointer}
+@media(max-width:900px){
+  .menu-btn{display:inline-flex;align-items:center}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;background:var(--bg);padding:12px 16px 18px;border-bottom:1px solid var(--line);margin:0}
+  .nav.open{display:flex}
+  .nav a{padding:12px 14px}
+}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:999px;border:1.5px solid transparent;
+  font:600 1rem var(--f-body);text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s;text-align:center}
+.btn-gold{background:var(--gold);color:var(--on-gold);box-shadow:0 6px 18px color-mix(in srgb,var(--gold) 40%,transparent)}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 10px 24px color-mix(in srgb,var(--gold) 50%,transparent)}
+.btn-line{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--ink);color:var(--bg)}
+.btn-ink{background:var(--ink);color:var(--bg)}
+.btn-sm{min-height:44px;padding:8px 18px;font-size:.95rem}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.tlink{font-weight:600;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:var(--gold)}
+.row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+
+/* sections */
+section.s{padding-block:clamp(56px,9vw,104px)}
+section.alt{background:var(--bg2);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+.sh{display:grid;gap:14px;margin-bottom:clamp(28px,5vw,52px)}
+.sh.center{text-align:center;justify-items:center}
+
+/* hero */
+.hero{position:relative;margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));
+  background:linear-gradient(180deg,var(--sky-a),var(--sky-b));overflow:hidden;padding-block:clamp(40px,7vw,80px) 0}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}
+.hero-copy{display:grid;gap:22px;padding-bottom:clamp(40px,7vw,90px);position:relative;z-index:2;min-width:0}
+.hero-copy .promise{font:italic 400 clamp(1.4rem,3vw,2rem)/1.2 var(--f-display);font-variation-settings:"SOFT" 100;color:var(--gold-deep)}
+.tba{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:.95rem;color:var(--ink2)}
+.tba i{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.hero-art{position:relative;z-index:2;align-self:end;min-width:0}
+.hero-art svg{display:block;width:100%;height:auto;max-width:100%}
+.hills{position:absolute;left:0;right:0;bottom:0;height:34%;z-index:1;pointer-events:none}
+.hills svg{width:100%;height:100%;display:block}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero-art{max-width:520px;margin:0 auto}}
+.orb{animation:float 7s ease-in-out infinite}
+.orb:nth-child(2n){animation-duration:9s;animation-delay:-3s}.orb:nth-child(3n){animation-duration:8s;animation-delay:-5s}
+@keyframes float{50%{transform:translateY(-10px)}}
+.flag{transform-origin:top center;animation:sway 5s ease-in-out infinite}
+.flag:nth-child(2n){animation-delay:-2s}.flag:nth-child(3n){animation-delay:-3.4s}
+@keyframes sway{50%{transform:rotate(3deg)}}
+@keyframes rise{from{transform:translateY(12px)}to{transform:none}}
+.hero-copy>*{animation:rise .8s both}.hero-copy>*:nth-child(2){animation-delay:.1s}.hero-copy>*:nth-child(3){animation-delay:.2s}.hero-copy>*:nth-child(4){animation-delay:.3s}.hero-copy>*:nth-child(5){animation-delay:.4s}
+
+/* glimpse */
+.glimpse{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,3vw,32px)}
+.glimpse article{display:grid;gap:10px;align-content:start;padding-top:18px;border-top:2px solid var(--gold)}
+.glimpse h3{font-size:1.35rem}
+.scene{margin-top:clamp(28px,5vw,52px);padding:clamp(20px,4vw,34px);border-radius:20px;background:var(--surface);border:1px solid var(--line);display:grid;gap:10px}
+.scene q{font:italic 400 clamp(1.25rem,2.6vw,1.7rem)/1.35 var(--f-display);font-variation-settings:"SOFT" 100;quotes:none}
+.tag{display:inline-flex;align-items:center;gap:6px;font:600 .72rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:var(--gold-soft);color:var(--ink);width:fit-content}
+.tag.demo{background:color-mix(in srgb,var(--demo) 14%,var(--surface));border:1px solid var(--demo)}
+.tag.todo{background:color-mix(in srgb,var(--warn) 16%,var(--surface));border:1px solid var(--warn)}
+@media(max-width:900px){.glimpse{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.glimpse{grid-template-columns:1fr}}
+
+/* worlds */
+.view-toggle{display:flex;gap:8px;margin-bottom:22px}
+.view-toggle button{min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:600 .95rem var(--f-body);cursor:pointer}
+.view-toggle button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.map{position:relative;background:linear-gradient(180deg,var(--sky-a),var(--sky-b));border-radius:28px;border:1px solid var(--line);aspect-ratio:1000/520;overflow:hidden}
+.map>svg{position:absolute;inset:0;width:100%;height:100%}
+.node{position:absolute;transform:translate(-50%,-50%);display:grid;justify-items:center;gap:6px;background:none;border:0;cursor:pointer;color:var(--ink);padding:4px;font:inherit;width:clamp(86px,14%,150px)}
+.node .dot{width:clamp(44px,5.6vw,66px);aspect-ratio:1;border-radius:50%;background:var(--surface);border:3px solid var(--w);display:grid;place-items:center;box-shadow:0 6px 16px color-mix(in srgb,var(--w) 35%,transparent);transition:transform .2s}
+.node:hover .dot,.node:focus-visible .dot{transform:scale(1.1)}
+.node svg{width:55%;height:55%;stroke:var(--w);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.node .nm{font:600 clamp(.72rem,1.2vw,.9rem)/1.2 var(--f-body);background:color-mix(in srgb,var(--surface) 90%,transparent);padding:3px 8px;border-radius:8px;text-align:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.wcard{--w:var(--w-faith);text-align:left;display:grid;gap:10px;align-content:start;padding:22px;border-radius:20px;background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--w);cursor:pointer;color:var(--ink);font:inherit;box-shadow:var(--shadow);transition:transform .18s}
+.wcard:hover{transform:translateY(-3px)}
+.wcard .ic{width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--w) 16%,var(--surface));display:grid;place-items:center}
+.wcard svg,.dlg-ic svg{width:26px;height:26px;stroke:var(--w);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.wcard .pillar{font:600 .74rem/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.wcard h3{font-size:1.3rem}
+.wcard .more{font-weight:600;font-size:.92rem;color:var(--ink);text-decoration:underline;text-decoration-color:var(--w);text-decoration-thickness:2px;text-underline-offset:4px}
+.note{font-size:.92rem;color:var(--ink2);max-width:75ch;margin-top:22px}
+.map-wrap[hidden],.cards-wrap[hidden]{display:none}
+@media(max-width:720px){.view-toggle{display:none}}
+
+dialog{border:0;padding:0;border-radius:24px;max-width:min(680px,calc(100vw - 24px));width:100%;background:var(--bg);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.4);max-height:calc(100dvh - 24px)}
+dialog::backdrop{background:rgba(20,15,8,.6)}
+.dlg-top{padding:26px 28px 20px;border-top:8px solid var(--w);display:grid;gap:10px;background:color-mix(in srgb,var(--w) 10%,var(--bg))}
+.dlg-ic{width:48px;height:48px;border-radius:14px;background:var(--surface);display:grid;place-items:center;border:2px solid var(--w)}
+.dlg-body{padding:6px 28px 28px;display:grid;gap:18px;overflow:auto}
+.dlg-body h4{font-family:var(--f-body);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);font-weight:700;margin-bottom:6px}
+.dlg-body ul{margin:0;padding-left:1.15rem;display:grid;gap:4px}
+.dlg-x{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.3rem;cursor:pointer}
+.dlg-scene{padding:14px 16px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-style:italic}
+
+/* signature */
+.sig{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.sig article{grid-column:span 2;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;display:grid;gap:12px;align-content:start}
+.sig article.big{grid-column:span 3}
+.sig .num-ic{width:40px;height:40px;border-radius:50%;background:var(--gold-soft);display:grid;place-items:center}
+.sig .num-ic svg{width:22px;height:22px;stroke:var(--gold-deep);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:900px){.sig{grid-template-columns:1fr 1fr}.sig article,.sig article.big{grid-column:span 1}}
+@media(max-width:600px){.sig{grid-template-columns:1fr}}
+.pass{margin-top:22px;padding:24px;border-radius:22px;background:var(--surface);border:1.5px dashed var(--gold);display:grid;gap:16px}
+.stamps{display:grid;grid-template-columns:repeat(auto-fit,minmax(86px,1fr));gap:10px}
+.stamp{--w:var(--w-faith);display:grid;justify-items:center;gap:6px;padding:10px 4px;min-height:92px;background:transparent;border:0;color:var(--ink);font:600 .74rem/1.2 var(--f-body);cursor:pointer;text-align:center}
+.stamp span.ring{width:56px;height:56px;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;transition:all .25s}
+.stamp svg{width:26px;height:26px;stroke:var(--ink2);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
+.stamp[aria-pressed="true"] span.ring{border:3px solid var(--w);background:color-mix(in srgb,var(--w) 18%,var(--surface));transform:rotate(-8deg)}
+.stamp[aria-pressed="true"] svg{stroke:var(--w);opacity:1}
+
+/* adventure */
+.adv{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.adv a{display:grid;gap:10px;align-content:space-between;padding:22px;border-radius:20px;background:var(--surface);border:1px solid var(--line);text-decoration:none;min-height:220px;transition:transform .18s,border-color .18s}
+.adv a:hover{transform:translateY(-3px);border-color:var(--gold)}
+.adv h3{font-size:1.4rem}
+.adv .go{font-weight:600;font-size:.92rem}
+.adv .go::after{content:" →"}
+.adv a.first{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.adv a.first .muted{color:color-mix(in srgb,var(--bg) 78%,transparent)}
+@media(max-width:1000px){.adv{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.adv{grid-template-columns:1fr}.adv a{min-height:0}}
+
+/* schedule */
+.sched{list-style:none;margin:0;padding:0;display:grid;gap:0;max-width:820px}
+.sched li{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line)}
+.sched li:last-child{border-bottom:1px solid var(--line)}
+.sched time{font:600 .95rem var(--f-body);color:var(--gold-deep);font-variant-numeric:tabular-nums}
+.sched h4{font-family:var(--f-display);font-weight:500;font-size:1.25rem;margin-bottom:4px}
+.sched .kind{font:600 .72rem/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.sched li.brk{opacity:.85}
+@media(max-width:520px){.sched li{grid-template-columns:1fr;gap:4px}}
+
+/* tickets / forms */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,36px);box-shadow:var(--shadow)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:start}
+@media(max-width:860px){.two{grid-template-columns:1fr}}
+.two>*,.split>*,.sig>*{min-width:0}
+form{display:grid;gap:18px}
+.f{display:grid;gap:6px;min-width:0}
+.f label,.f legend{font-weight:600;font-size:.97rem}
+.f .hint{font-size:.88rem;color:var(--ink2)}
+.f .req{color:var(--gold-deep);font-weight:700}
+input[type=text],input[type=email],input[type=url],input[type=number],select,textarea{width:100%;min-height:48px;padding:11px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:400 1rem var(--f-body)}
+textarea{min-height:110px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:#C0392B}
+.err{color:#B3261E;font-weight:600;font-size:.9rem}
+:root[data-theme="dark"] .err{color:#FF8E86}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .err{color:#FF8E86}}
+fieldset{border:0;padding:0;margin:0;min-width:0;display:grid;gap:8px}
+.checks{display:grid;gap:4px}
+.check{display:flex;gap:12px;align-items:flex-start;min-height:44px;padding:8px 0;cursor:pointer}
+.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--gold-deep);flex:none}
+.check span{min-width:0}
+.checks.cols{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:0 18px}
+.status{padding:14px 16px;border-radius:12px;border:1.5px solid var(--demo);background:color-mix(in srgb,var(--demo) 10%,var(--surface));font-size:.95rem}
+.status.bad{border-color:#C0392B;background:color-mix(in srgb,#C0392B 10%,var(--surface))}
+.privacy{font-size:.88rem;color:var(--ink2);border-left:3px solid var(--gold);padding-left:12px}
+
+.tiers{display:grid;gap:12px}
+.tier{position:relative;display:grid;gap:8px;padding:18px 18px 18px 52px;border-radius:16px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer}
+.tier input{position:absolute;left:18px;top:20px;width:22px;height:22px;accent-color:var(--gold-deep)}
+.tier:has(input:checked){border-color:var(--gold-deep);background:var(--gold-soft);box-shadow:0 0 0 1px var(--gold-deep)}
+.tier:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:2px}
+.tier .t-top{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;justify-content:space-between}
+.tier h4{font-size:1.2rem}
+.price{font:600 1.05rem var(--f-body);font-variant-numeric:tabular-nums}
+.inc{display:grid;gap:14px}
+.inc h5{margin:0 0 4px;font:700 .76rem/1.2 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.inc ul{margin:0;padding-left:1.1rem;display:grid;gap:3px;font-size:.95rem}
+.qty{display:flex;align-items:center;gap:10px}
+.qty button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:1.3rem;cursor:pointer}
+.qty input{width:80px;text-align:center}
+.sum{display:grid;gap:8px;padding:18px;border-radius:16px;background:var(--bg2)}
+.sum div{display:flex;justify-content:space-between;gap:12px}
+.sum .total{border-top:1px solid var(--line);padding-top:10px;font-weight:700;font-size:1.15rem}
+.sum span:last-child{font-variant-numeric:tabular-nums}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.95rem}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 .76rem/1.2 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);background:var(--bg2)}
+tr:last-child td{border-bottom:0}
+
+/* package cards */
+.pk{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pk article{display:grid;gap:12px;align-content:start;padding:26px;border-radius:22px;background:var(--surface);border:1px solid var(--line)}
+.pk ul{margin:0;padding-left:1.1rem;display:grid;gap:4px;font-size:.96rem}
+.pk5{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+@media(max-width:900px){.pk{grid-template-columns:1fr}}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.split>div{padding:24px;border-radius:20px;border:1px solid var(--line);background:var(--surface)}
+.split h3{font-size:1.25rem;margin-bottom:8px}
+@media(max-width:760px){.split{grid-template-columns:1fr}}
+
+/* faq */
+details{border-top:1px solid var(--line);padding:2px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:18px 40px 18px 0;font:500 1.15rem var(--f-display);font-variation-settings:"SOFT" 100;position:relative;min-height:56px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:6px;top:14px;font:400 1.6rem var(--f-body);color:var(--gold-deep)}
+details[open] summary::after{content:"–"}
+details>div{padding:0 0 20px;display:grid;gap:10px;max-width:68ch;color:var(--ink2)}
+
+/* final */
+.final{text-align:center;padding-block:clamp(72px,12vw,140px);display:grid;gap:26px;justify-items:center;position:relative}
+.final h2{font-size:clamp(2.2rem,5.6vw,4rem);max-width:16ch}
+
+/* confirmation */
+.confirm{padding-block:clamp(40px,7vw,80px);display:grid;gap:30px}
+.demo-ribbon{display:flex;gap:12px;align-items:flex-start;padding:14px 18px;border-radius:14px;border:1.5px solid var(--demo);background:color-mix(in srgb,var(--demo) 10%,var(--surface))}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.steps li{display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start}
+.steps .n{width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:600 .95rem var(--f-body)}
+
+/* copy drafts */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tabs button{min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:600 .95rem var(--f-body);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.mail{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:12px;margin-bottom:16px}
+.mail pre{margin:0;white-space:pre-wrap;font:400 .98rem/1.65 var(--f-body);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px;overflow-wrap:anywhere}
+.mail header{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:space-between;align-items:center}
+.mail h4{font-size:1.15rem}
+code,.mono{font:500 .88rem ui-monospace,SFMono-Regular,Menlo,monospace}
+.cfg{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:auto;max-height:420px;white-space:pre;font:500 .82rem/1.55 ui-monospace,Menlo,monospace}
+ul.ck{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+
+/* footer */
+.ftr{border-top:1px solid var(--line);padding-block:44px 56px;margin-top:0;display:grid;gap:22px;font-size:.92rem;color:var(--ink2)}
+.ftr .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+.ftr a{color:var(--ink)}
+.ftr ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.ftr li a{display:inline-flex;min-height:36px;align-items:center}
+.theme-btn{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:999px;min-height:44px;padding:0 16px;font:600 .9rem var(--f-body);cursor:pointer}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+
+<a class="skip" href="#main" data-skip>Skip to main content</a>
+<div class="pv" role="region" aria-label="Preview controls">
+  <div class="wrap">
+    <span><b>Artifact preview</b> · Demo only. Nothing here is saved, charged, or emailed.</span>
+    <span class="row" style="gap:10px"><span id="pv-lbl">Event status:</span>
+      <span class="seg" role="group" aria-labelledby="pv-lbl">
+        <button type="button" data-status="launch-list" aria-pressed="true">Launch list (default)</button>
+        <button type="button" data-status="tickets-preview" aria-pressed="false">Ticket selection preview</button>
+      </span></span>
+  </div>
+</div>
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Kingdom Story Festival home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 9c4-2 9-2 13 1 4-3 9-3 13-1v16c-4-2-9-2-13 1-4-3-9-3-13-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 10v16" stroke="var(--gold)" stroke-width="2"/><path d="M16 3l1.6 3.2L21 6.7l-2.5 2.4.6 3.4L16 10.9 12.9 12.5l.6-3.4L11 6.7l3.4-.5z" fill="var(--gold)"/></svg>
+      Kingdom Story Festival</a>
+    <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#worlds" data-nav="worlds">Explore the Worlds</a>
+      <a href="#visit" data-nav="visit">Plan Your Visit</a>
+      <a href="#authors" data-nav="authors">For Authors</a>
+      <a href="#sponsors" data-nav="sponsors">For Sponsors</a>
+      <a class="btn btn-gold btn-sm" href="#join" id="nav-cta">Join the Launch List</a>
+    </nav>
+  </div>
+</header>
+<main id="main" tabindex="-1"></main>
+<footer class="ftr" id="footer"></footer>
+<dialog id="dlg" aria-labelledby="dlg-title"></dialog>
+<div id="live" class="skip" style="position:absolute;left:-9999px" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+/* ============================================================
+   CONFIG — every editable event fact lives here. Null / [BRACKETS] = not confirmed.
+   ============================================================ */
+const CONFIG = {
+  name: 'Kingdom Story Festival',
+  tagline: 'Seven Worlds. Countless Stories. One King.',
+  promise: 'Where Books Come to Life.',
+  nameNote: 'Working brand name. Availability of the name or trademark has not been verified.',
+  status: 'launch-list',            // 'launch-list' | 'tickets-preview' | 'tickets-live'
+  dates: null,                      // e.g. 'Saturday, May 2, 2027' once confirmed
+  location: null,                   // e.g. 'Venue name, City, State' once confirmed
+  datePlaceholder: '[EVENT DATE]',
+  locationPlaceholder: '[VENUE AND CITY]',
+  applicationsOpen: true,           // author / exhibitor applications
+  sponsorInquiriesOpen: true,
+  backendConnected: false,          // true only after server-side storage + email are verified
+  checkoutUrl: null,                // Stripe-hosted Checkout link, created server-side
+  contact: { email: '[CONTACT EMAIL]', phone: null },
+  links: { privacy: null, terms: null, refunds: null, accessibility: null, photography: null },
+  // Ticket structures are PROPOSED. approved:false => labeled "Proposed". price null => "Price to be announced".
+  tickets: [
+    { id:'general', name:'General Admission', approved:false, price:null, demoPrice:10,
+      who:'One guest.',
+      included:['Entry to all seven story worlds','Story Passport (stamps come from taking part)','Viewing the Story Parade','Walk-up seating at the Living Pages Stage, as space allows'],
+      reservations:'None planned. If a limited-capacity activity needs a reservation, it will be marked and free to reserve [policy to be confirmed].' },
+    { id:'family', name:'Family Admission', approved:false, price:null, demoPrice:30,
+      who:'A household. [Number of people and ages to be defined by organizers.]',
+      included:['Everything in General Admission for each person covered','Family activity trail through the Family Storyhouse','Kids may stay with their responsible adult throughout'],
+      reservations:'None planned [to be confirmed].' },
+    { id:'premium', name:'Premium Experience', approved:false, price:null, demoPrice:50,
+      who:'One guest.',
+      included:['Everything in General Admission'],
+      premiumExtra:['[TO BE DEFINED] Ideas for review: reserved seats for one Living Pages Stage scene, a timed early-entry window, a small guided meet-the-author session.','Until organizers approve specific benefits, no premium extra is promised.'],
+      reservations:'Any reserved seat or timed session would be chosen at checkout and shown before you pay [to be confirmed].' }
+  ],
+  addOns: [],                       // none approved. Nothing is ever preselected.
+  separateCosts: ['Books (priced by each author or seller; buying is never required)','Food and drinks [vendors and options to be confirmed]','Parking [venue-dependent, to be confirmed]'],
+  confirmedAttractions: []          // add only what is booked
+};
+const isPreview = () => CONFIG.status === 'tickets-preview';
+const dateLine = () => CONFIG.dates && CONFIG.location ? `${CONFIG.dates} · ${CONFIG.location}`
+  : isPreview() ? `${CONFIG.datePlaceholder} · ${CONFIG.locationPlaceholder} (placeholders)` : 'Date and location to be announced';
+
+/* ============================================================
+   DATA
+   ============================================================ */
+const ICONS = {
+  faith:'<path d="M12 21v-8M12 13c0-4-3-6-7-6 0 4 3 6 7 6zM12 11c0-3 2-5 6-5 0 3-2 5-6 5z"/>',
+  family:'<path d="M3 11l9-7 9 7v9H3zM10 20v-6h4v6"/>',
+  edu:'<path d="M3 5h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H3zM21 5h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z"/>',
+  biz:'<path d="M3 6h18v4H3zM3 13h8v5H3zM13 13h8v5h-8z"/>',
+  gov:'<path d="M3 9l9-5 9 5M5 10v8M10 10v8M14 10v8M19 10v8M3 20h18"/>',
+  media:'<path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/>',
+  arts:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>'
+};
+const ico = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>`;
+const WORLDS = [
+ { id:'faith', col:'--w-faith', pillar:'Faith', name:'The Testimony Garden',
+   celebrates:'Faith that is lived and told plainly: devotion, prayer, and true stories of how God changes lives.',
+   books:['Devotionals','Christian living','Prayer guides','Memoir and testimony'],
+   acts:['Intimate storytelling in a garden setting','Quiet reflection corners','An optional prayer space (always optional, never required)'],
+   scene:'A reader sits on a garden bench with a devotional in their lap while an author tells, in their own words, how a hard season changed them.',
+   authorLine:'Share a testimony-driven book here' },
+ { id:'family', col:'--w-family', pillar:'Family', name:'The Family Storyhouse',
+   celebrates:'Stories that tie generations together: bedtime books, parenting wisdom, marriage, and legacy.',
+   books:['Children’s picture books','Parenting and marriage','Family devotionals','Legacy and family history'],
+   acts:['A story tree where families add their own pages','Puppet story moments','Family activities','Original characters to meet'],
+   scene:'A child hears a character speak, turns toward the stage, and recognizes the hero from the book in their hands.',
+   authorLine:'Invite families into your children’s or family book' },
+ { id:'edu', col:'--w-edu', pillar:'Education', name:'The Discovery Academy',
+   celebrates:'Curiosity. Learning, history, and science books that make a child lean in.',
+   books:['History','Science and nature','Learning and teaching resources','Nonfiction for curious readers'],
+   acts:['Hands-on discovery tables','A create-your-own-book station','Short “ask the author” moments'],
+   scene:'A girl turns the last page of her own tiny book, folds it, and asks if she can show the author.',
+   authorLine:'Bring a hands-on activity that goes with your book' },
+ { id:'biz', col:'--w-biz', pillar:'Business', name:'The Builder’s Village',
+   celebrates:'Work as stewardship: entrepreneurship, leadership, and creativity used to serve others.',
+   books:['Entrepreneurship','Stewardship and money','Leadership','Creative work'],
+   acts:['Problem-solving activities','Young entrepreneur ideas','Supervised, responsible AI demonstrations that explain what AI can and cannot do'],
+   scene:'A teenager sketches a small business idea, then asks an author how to serve customers well, not just win them.',
+   authorLine:'Show how your business or leadership book works in practice' },
+ { id:'gov', col:'--w-gov', pillar:'Government', name:'The Justice & Service Hall',
+   celebrates:'Civic responsibility, justice, history, and public service lived with courage and humility.',
+   books:['Civics and citizenship','Justice and history','Biography of public servants','Service and community'],
+   acts:['Stories of courageous service','Age-appropriate activities about fairness and responsibility'],
+   scene:'A family listens to a story about someone who stood up for a neighbor, then talks quietly about what fairness looks like at home.',
+   authorLine:'Tell the story behind your civic, history, or biography book' },
+ { id:'media', col:'--w-media', pillar:'Media', name:'The Story Studio',
+   celebrates:'Communication done well: publishing, journalism, and digital storytelling used for truth.',
+   books:['Communication','Publishing','Journalism','Digital storytelling'],
+   acts:['Author interviews','Supervised storytelling demonstrations'],
+   scene:'A young reader sits in the interview chair, asks an author how a book gets made, and hears the answer on a real microphone.',
+   authorLine:'Be considered for an author interview' },
+ { id:'arts', col:'--w-arts', pillar:'Arts & Entertainment', name:'The Living Pages Theater',
+   celebrates:'Imagination on its feet: fiction, poetry, music, illustrated adventures, and performance.',
+   books:['Fiction','Poetry','Music and lyrics','Illustrated adventures'],
+   acts:['Live scenes adapted from participating books','Original characters','Music','The Story Parade'],
+   scene:'The lights come up, a scene from a novel begins, and a reader in the third row whispers, “That’s my chapter.”',
+   authorLine:'Ask for a scene from your book to be considered' }
+];
+const worldById = id => WORLDS.find(w => w.id === id);
+
+/* ============================================================
+   STATE + MEASUREMENT (in-memory demo only: no tracking is installed)
+   ============================================================ */
+const state = { submitted:{}, prefWorld:'', tix:{ tier:null, qty:1, step:1 }, eventLog:[], stamps:new Set(), mapView:null };
+function track(name, props={}){ state.eventLog.push({ t:new Date().toLocaleTimeString(), name, props }); }
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const money = n => '$' + n.toFixed(2);
+const announce = t => { const l = $('#live'); l.textContent = ''; setTimeout(() => l.textContent = t, 40); };
+const ctaLabel = () => CONFIG.status === 'launch-list' ? 'Join the Launch List' : 'Get Tickets';
+const demoTag = t => `<span class="tag demo">Demo · ${esc(t)}</span>`;
+
+function field({ id, label, type='text', req=false, hint='', opts=null, ac='', rows=0, value='' }) {
+  const d = [hint ? id+'-h' : '', id+'-e'].filter(Boolean).join(' ');
+  let ctl;
+  if (opts) ctl = `<select id="${id}" name="${id}" ${req?'required':''} aria-describedby="${d}">${opts.map(o => `<option value="${esc(o[0])}" ${o[0]===value?'selected':''}>${esc(o[1])}</option>`).join('')}</select>`;
+  else if (rows) ctl = `<textarea id="${id}" name="${id}" rows="${rows}" ${req?'required':''} aria-describedby="${d}">${esc(value)}</textarea>`;
+  else ctl = `<input id="${id}" name="${id}" type="${type}" ${ac?`autocomplete="${ac}"`:''} ${req?'required':''} aria-describedby="${d}" value="${esc(value)}">`;
+  return `<div class="f"><label for="${id}">${esc(label)} ${req?'<span class="req" aria-hidden="true">*</span><span class="skip" style="position:absolute;left:-9999px">(required)</span>':'<span class="muted small">(optional)</span>'}</label>
+    ${hint?`<div class="hint" id="${id}-h">${esc(hint)}</div>`:''}${ctl}<div class="err" id="${id}-e" hidden></div></div>`;
+}
+const check = (id, html, checked=false) => `<label class="check"><input type="checkbox" id="${id}" name="${id}" ${checked?'checked':''}><span>${html}</span></label>`;
+
+function bindForm(formId, rules, onValid) {
+  const form = $('#'+formId); if (!form) return;
+  form.setAttribute('novalidate','');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const errs = [];
+    $$('.err', form).forEach(x => { x.hidden = true; x.textContent = ''; });
+    $$('[aria-invalid]', form).forEach(x => x.removeAttribute('aria-invalid'));
+    for (const [id, r] of Object.entries(rules)) {
+      const el = $('#'+id, form); if (!el) continue;
+      const v = (el.value || '').trim(); let m = '';
+      if (r.req && !v) m = 'This field is required.';
+      else if (v && r.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) m = 'Enter a valid email, like name@example.com.';
+      else if (v && r.url && !/^https?:\/\/.+\..+/i.test(v)) m = 'Enter a full web address starting with https://';
+      else if (v && r.min && v.length < r.min) m = `Please write at least ${r.min} characters.`;
+      if (m) { errs.push(id); el.setAttribute('aria-invalid','true'); const er = $('#'+id+'-e'); er.textContent = m; er.hidden = false; }
+    }
+    if (form.dataset.group) { // at least one checkbox in group
+      const g = $$(`input[name="${form.dataset.group}"]`, form);
+      if (g.length && !g.some(c => c.checked)) { errs.push('grp'); const er = $('#grp-e'); er.textContent = 'Choose at least one option.'; er.hidden = false; }
+    }
+    const st = $('#'+formId+'-st');
+    if (errs.length) {
+      st.className = 'status bad'; st.hidden = false;
+      st.textContent = `Please fix ${errs.length} ${errs.length>1?'fields':'field'} before submitting.`;
+      const first = errs[0]==='grp' ? $$('input[name="'+form.dataset.group+'"]',form)[0] : $('#'+errs[0], form); first && first.focus();
+      return;
+    }
+    st.hidden = true;
+    onValid(Object.fromEntries(new FormData(form).entries()), form);
+  });
+}
+const formStatus = id => `<div class="status" id="${id}-st" role="alert" hidden></div>`;
+
+/* ============================================================
+   SHARED SECTIONS
+   ============================================================ */
+function demoNote(extra='') {
+  return `<div class="privacy"><strong>Demo form.</strong> Nothing you type here is saved, sent, or shared. ${extra} Please don’t enter children’s names or personal details anywhere on this site.</div>`;
+}
+
+function launchListSection() {
+  return `<div class="two">
+    <div class="sh" style="margin:0">
+      <span class="eyebrow">Launch list</span>
+      <h2>Be first to hear when the doors open.</h2>
+      <p class="lede">Dates, venue, and tickets are not announced yet. Tell us you’re interested and we’ll write when there is something real to share: the date, the place, how admission works.</p>
+      <ul class="ck">
+        <li>${check_ic()} No payment now. No account.</li>
+        <li>${check_ic()} Updates about this festival only, unless you tick the separate optional box.</li>
+        <li>${check_ic()} Unsubscribe any time [mechanism to be connected].</li>
+      </ul>
+      <p class="small muted">${esc(dateLine())}</p>
+    </div>
+    <div class="panel">
+      <form id="ll-form">
+        ${field({id:'ll-first',label:'First name',req:true,ac:'given-name'})}
+        ${field({id:'ll-email',label:'Email',type:'email',req:true,ac:'email'})}
+        ${field({id:'ll-who',label:'I’m coming as',req:true,opts:[['','Choose one'],['reader','A reader'],['family','A family'],['group','A church, school, or homeschool group'],['gift','Someone planning for others']]})}
+        <fieldset><legend>Which worlds sound most like you? <span class="muted small">(optional)</span></legend>
+          <div class="checks cols">${WORLDS.map(w => check('ll-w-'+w.id, esc(w.pillar === 'Arts & Entertainment' ? 'Arts & Entertainment' : w.pillar))).join('')}</div></fieldset>
+        <div class="checks">
+          ${check('ll-agree','I’d like emails about Kingdom Story Festival. <span class="req" aria-hidden="true">*</span>')}
+          ${check('ll-mkt','Also send me news from the organizers’ other work (Tell Your Story Coaching, Message Media, Kingdom Book Awards). <span class="muted">Optional. Separate from the festival.</span>')}
+        </div>
+        <div class="err" id="ll-agree-e" hidden></div>
+        ${formStatus('ll-form')}
+        <button class="btn btn-gold" type="submit">Join the Launch List</button>
+        ${demoNote('In production this posts to a server endpoint that validates and stores it.')}
+      </form>
+    </div></div>`;
+}
+const check_ic = () => `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:-3px;margin-right:8px;stroke:var(--gold-deep);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5 9-10"/></svg>`;
+
+function bindLaunchList() {
+  const form = $('#ll-form'); if (!form) return;
+  bindForm('ll-form', { 'll-first':{req:true}, 'll-email':{req:true,email:true}, 'll-who':{req:true} }, (d) => {
+    if (!$('#ll-agree').checked) {
+      const er = $('#ll-agree-e'); er.textContent = 'Tick this box so we know you want festival updates.'; er.hidden = false;
+      const st = $('#ll-form-st'); st.className='status bad'; st.hidden=false; st.textContent='Please fix 1 field before submitting.'; $('#ll-agree').focus(); return;
+    }
+    state.submitted.reader = { kind:'launch-list', first:d['ll-first'] };
+    track('registration_completed_demo', { kind:'launch-list', who:d['ll-who'], marketing:$('#ll-mkt').checked });
+    location.hash = 'confirm-reader';
+  });
+  $('#ll-agree').addEventListener('change', () => { const er=$('#ll-agree-e'); er.hidden=true; });
+}
+
+/* ---------- ticket selector ---------- */
+function tierCard(t) {
+  const sel = state.tix.tier === t.id;
+  const price = CONFIG.status==='tickets-live' && t.price!=null ? money(t.price) : `Demo ${money(t.demoPrice)}`;
+  return `<label class="tier"><input type="radio" name="tier" value="${t.id}" ${sel?'checked':''}>
+    <div class="t-top"><h4>${esc(t.name)}</h4><span class="price">${price}</span></div>
+    <div class="row" style="gap:8px">${t.approved?'':'<span class="tag todo">Proposed · not approved</span>'}<span class="tag demo">Demo price for layout testing</span></div>
+    <p class="muted small">${esc(t.who)}</p></label>`;
+}
+function tixSelected() { return CONFIG.tickets.find(t => t.id === state.tix.tier); }
+function includedPanel(t) {
+  if (!t) return `<div class="inc"><p class="muted">Choose an admission type to see exactly what it includes, what is optional, and what costs extra.</p>
+    <div><h5>Never charged extra</h5><ul><li>Basic accessibility accommodations</li></ul></div></div>`;
+  return `<div class="inc" aria-live="polite">
+    <div><h5>Included with ${esc(t.name)}</h5><ul>${t.included.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>
+    ${t.premiumExtra?`<div><h5>What Premium adds <span class="tag todo">Needs approval</span></h5><ul>${t.premiumExtra.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`:''}
+    <div><h5>Needs a separate reservation?</h5><p class="small">${esc(t.reservations)}</p></div>
+    <div><h5>Optional, purchased separately</h5><ul>${CONFIG.separateCosts.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>
+    <div><h5>Never charged extra</h5><ul><li>Basic accessibility accommodations</li></ul></div></div>`;
+}
+function ticketSelectorSection() {
+  return `<div class="sh"><span class="eyebrow">Tickets · preview</span><h2>Choose how you’ll visit.</h2>
+    <p class="lede">These admission types are proposals for organizer review. The prices below are placeholders so you can test the flow. Real prices appear only after they are approved.</p></div>
+    <div class="panel" id="tix"></div>`;
+}
+function renderTix() {
+  const root = $('#tix'); if (!root) return;
+  const t = tixSelected(), q = state.tix.qty, total = t ? t.demoPrice * q : 0;
+  const af = document.activeElement && document.activeElement.id;
+  if (state.tix.step === 1) {
+    root.innerHTML = `<div class="two"><div style="display:grid;gap:20px">
+      <fieldset><legend class="h-leg" style="font-weight:700;margin-bottom:6px">1. Admission type <span class="muted small" style="font-weight:400">(none preselected)</span></legend>
+        <div class="tiers">${CONFIG.tickets.map(tierCard).join('')}</div></fieldset>
+      <div class="f"><label for="qty">Number of tickets</label>
+        <div class="qty"><button type="button" id="qm" aria-label="Fewer tickets">−</button><input id="qty" type="number" min="1" max="10" value="${q}" inputmode="numeric"><button type="button" id="qp" aria-label="More tickets">+</button></div></div>
+      <div class="sum" aria-live="polite">
+        <div><span>${t?esc(t.name)+' × '+q:'No admission type chosen'}</span><span>${t?money(t.demoPrice*q):'—'}</span></div>
+        <div class="muted small"><span>Fees and taxes</span><span>None in demo</span></div>
+        <div class="total"><span>Total you would pay</span><span>${t?money(total):'—'}</span></div>
+        <p class="small muted">Demo values. In production the full payable total, including any approved fees, is shown here before you confirm.</p></div>
+      <button class="btn btn-gold" id="tix-next" ${t?'':'disabled'}>Continue to demo checkout</button>
+      <p class="small muted">${isPreview() ? 'No extras are preselected, and none are added at checkout.' : ''}</p></div>
+      <div>${includedPanel(t)}</div></div>`;
+    $$('input[name=tier]', root).forEach(r => r.addEventListener('change', () => { state.tix.tier = r.value; track('ticket_selected', { tier:r.value }); renderTix(); $('input[name=tier]:checked')?.focus(); }));
+    const setQ = n => { state.tix.qty = Math.max(1, Math.min(10, n||1)); track('ticket_quantity_changed',{qty:state.tix.qty}); renderTix(); $('#qty')?.focus(); };
+    $('#qm').onclick = () => setQ(q-1); $('#qp').onclick = () => setQ(q+1);
+    $('#qty').addEventListener('change', e => setQ(parseInt(e.target.value,10)));
+    $('#tix-next').onclick = () => { state.tix.step = 2; track('checkout_started_demo',{tier:t.id,qty:q}); renderTix(); $('#co-first')?.focus(); };
+  } else {
+    root.innerHTML = `<div class="two"><form id="co-form" style="gap:18px">
+      <div class="status"><strong>Demo checkout.</strong> No payment is collected and no card fields exist here. In production this step is a Stripe-hosted Checkout page.</div>
+      ${field({id:'co-first',label:'First name',req:true,ac:'given-name'})}
+      ${field({id:'co-email',label:'Email for your confirmation',type:'email',req:true,ac:'email'})}
+      ${check('co-mkt','Send me other news from the organizers. <span class="muted">Optional, unchecked by default.</span>')}
+      <div class="sum"><div><span>${esc(t.name)} × ${q}</span><span>${money(total)}</span></div><div class="muted small"><span>Fees and taxes</span><span>None in demo</span></div>
+        <div class="total"><span>Total you would pay</span><span>${money(total)}</span></div></div>
+      ${formStatus('co-form')}
+      <div class="row"><button class="btn btn-gold" type="submit">Complete demo checkout (no payment)</button>
+        <button class="btn btn-line" type="button" id="co-leave">Leave checkout</button></div>
+      <p class="privacy">Please don’t enter children’s names or details. Ticket holders’ names are collected only for adults in the household.</p></form>
+      <div>${includedPanel(t)}</div></div>`;
+    bindForm('co-form', { 'co-first':{req:true}, 'co-email':{req:true,email:true} }, d => {
+      state.submitted.reader = { kind:'tickets', first:d['co-first'], tier:t.name, qty:q, total };
+      track('registration_completed_demo', { kind:'tickets', tier:t.id, qty:q });
+      state.tix = { tier:null, qty:1, step:1 };
+      location.hash = 'confirm-reader';
+    });
+    $('#co-leave').onclick = () => { track('checkout_abandoned_demo',{tier:t.id,qty:q}); state.tix.step = 1; renderTix(); announce('You left the demo checkout. Nothing was saved.'); $('#tix-next')?.focus(); };
+  }
+}
+function ticketsSection() {
+  return `<section class="s alt" id="tickets" aria-labelledby="tk-h"><div class="wrap">
+    <h2 id="tk-h" class="skip" style="position:absolute;left:-9999px">Tickets and launch list</h2>
+    ${CONFIG.status==='launch-list' ? launchListSection() : ticketSelectorSection()}
+  </div></section>`;
+}
+
+/* ---------- sample day / faq ---------- */
+function sampleDay() {
+  const rows = [
+   ['10:00','Doors open and passport pick-up','Arrival','Warm welcome, a map of the seven worlds, and a Story Passport. Take your time.'],
+   ['10:30','Opening story on the Living Pages Stage','Reading','A short scene and a welcome. Come for it or wander straight into a world.'],
+   ['11:00','Wander and discover','Open exploration','Visit any world, in any order. Try an activity, browse books, listen to a testimony.'],
+   ['12:00','Author encounters in the Author Village','Author meetings','Drop in to talk with authors at their tables. Signings and conversations happen on their own schedule.'],
+   ['12:45','Rest, lunch, and quiet time','Break','Step away. Quiet spots and family-friendly seating [food options to be confirmed].'],
+   ['1:30','Living Pages Stage scene','Performance','A live scene adapted from a participating book, subject to author permission and production.'],
+   ['2:30','Create something in “Your Story Matters”','Creative studio','Make a page, a character, or a tiny book to take home.'],
+   ['3:30','The Story Parade','Parade','Characters and families walk the path between the worlds. Join in or watch.'],
+   ['4:15','Closing celebration','Closing','Gratitude, a final story, and a blessing for the road home.']
+  ];
+  return `<ol class="sched">${rows.map((r,i) => `<li class="${r[2]==='Break'?'brk':''}"><time>${r[0]}</time><div><div class="kind">${r[2]}</div><h4>${r[1]}</h4><p class="muted">${r[3]}</p></div></li>`).join('')}</ol>
+   <p class="note"><span class="tag todo">Sample experience — not the final program</span><br>Times and sessions are illustrative. There is one main stage, and no activity here is required. You choose your own path through the day.</p>`;
+}
+function faq() {
+  const tbd = '<span class="tag todo">Organizer review needed</span>';
+  const items = [
+   ['Is the festival suitable for children?','We’re designing it for families and readers of all ages, with age-appropriate activities in every world. Specific activities will show suggested ages. Final guidance: '+ tbd],
+   ['Is it accessible?','Accessibility is part of the planning, and basic accommodations will never carry an extra charge. Venue-specific details (step-free routes, seating, quiet spaces, sensory information) will be published once the venue is confirmed. ' + tbd],
+   ['Do children stay with a responsible adult?','Yes, that is the plan. Children are expected to stay with a parent or responsible adult throughout. Any drop-off activity would be a separate, clearly described option with its own policy. ' + tbd],
+   ['What does admission include?','Proposed: entry to all seven worlds, a Story Passport, the Story Parade, and general stage seating as space allows. The exact list is set when admission is approved and is shown before you pay.'],
+   ['Do books cost extra?','Books are sold by the authors and sellers, and buying is never required to take part or to earn passport stamps.'],
+   ['What about food and breaks?','Plan for a lunch break and quiet time in the day. Food options, outside-food rules, and allergen information depend on the venue. ' + tbd],
+   ['Can I be an author at the festival?','Possibly. Authors can apply for a table, a story encounter, or a media package. Applications are reviewed by the organizers. Paying for a table does not guarantee stage selection, media reach, sales, or award recognition. See <a class="tlink" href="#authors">For Authors</a>.'],
+   ['Can I take photos?','Photography preferences (where photos are welcome, where they are not, and how children’s images are treated) are not finalized. ' + tbd],
+   ['What about ticket changes and refunds?','Policies are not yet approved, so nothing is promised here. They will be published, and linked from checkout, before any ticket is sold. ' + tbd]
+  ];
+  return items.map(i => `<details><summary>${i[0]}</summary><div><p>${i[1]}</p></div></details>`).join('');
+}
+
+/* ============================================================
+   PAGES
+   ============================================================ */
+function heroArt() {
+  const cols = ['--w-faith','--w-family','--w-edu','--w-biz','--w-gov','--w-media','--w-arts'];
+  const flags = cols.map((c,i) => { const x = 40 + i*86; const y = 30 + Math.sin(i/6*Math.PI)*18; return `<g class="flag" style="transform-origin:${x}px ${y}px"><path d="M${x} ${y} l22 0 l-11 26z" fill="var(${c})"/></g>`; }).join('');
+  const orbs = cols.map((c,i) => { const ang = Math.PI*(1.12 + i*0.126); const cx = 300 + Math.cos(ang)*215, cy = 300 + Math.sin(ang)*190; return `<g class="orb"><circle cx="${cx}" cy="${cy}" r="26" fill="var(--glow)" opacity=".55"/><circle cx="${cx}" cy="${cy}" r="11" fill="var(${c})"/><circle cx="${cx-3}" cy="${cy-3}" r="3.2" fill="#fff" opacity=".8"/></g>`; }).join('');
+  return `<svg viewBox="0 0 600 470" role="img" aria-label="An open book with seven glowing lights rising from its pages, one for each story world">
+    <path d="M30 20 Q300 70 570 20" fill="none" stroke="var(--gold-deep)" stroke-width="1.5" opacity=".6"/>
+    ${flags}
+    <circle cx="300" cy="300" r="170" fill="var(--glow)" opacity=".35"/><circle cx="300" cy="300" r="110" fill="var(--glow)" opacity=".45"/>
+    ${orbs}
+    <path d="M300 410 L300 300 C250 270 160 270 70 300 L70 410 C160 385 250 390 300 410z" fill="var(--book)" stroke="var(--gold-deep)" stroke-width="2"/>
+    <path d="M300 410 L300 300 C350 270 440 270 530 300 L530 410 C440 385 350 390 300 410z" fill="var(--book)" stroke="var(--gold-deep)" stroke-width="2"/>
+    <g stroke="var(--gold-deep)" stroke-width="1.2" opacity=".35" fill="none"><path d="M95 330 C150 318 215 320 275 335"/><path d="M95 352 C150 340 215 342 275 357"/><path d="M95 374 C150 362 215 364 275 379"/><path d="M325 335 C385 320 450 318 505 330"/><path d="M325 357 C385 342 450 340 505 352"/><path d="M325 379 C385 364 450 362 505 374"/></g>
+    <path d="M300 300 L300 410" stroke="var(--gold)" stroke-width="4"/>
+    <ellipse cx="300" cy="428" rx="250" ry="14" fill="#000" opacity=".12"/>
+  </svg>`;
+}
+function hills() {
+  return `<div class="hills" aria-hidden="true"><svg viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0 110 C200 40 380 120 600 70 S1000 40 1200 100 V200 H0z" fill="var(--hill-a)"/><path d="M0 150 C220 100 420 170 650 130 S1020 110 1200 150 V200 H0z" fill="var(--hill-b)"/><path d="M0 185 C300 160 520 200 760 175 S1060 165 1200 188 V200 H0z" fill="var(--hill-c)"/></svg></div>`;
+}
+function worldCards() {
+  return WORLDS.map(w => `<button class="wcard" style="--w:var(${w.col})" data-world="${w.id}" aria-haspopup="dialog">
+    <span class="ic">${ico(w.id)}</span><span class="pillar">${esc(w.pillar)}</span><h3>${esc(w.name)}</h3>
+    <p class="muted small">${esc(w.celebrates)}</p><span class="more">See what’s inside</span></button>`).join('');
+}
+function worldMap() {
+  const pts = [[10,59.6],[24,30.8],[38,61.5],[52,30.8],[66,61.5],[80,30.8],[91,61.5]];
+  return `<div class="map" role="group" aria-label="Map of the seven story worlds">
+    <svg viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 400 C150 340 300 420 500 380 S850 340 1000 400 V520 H0z" fill="var(--hill-a)"/><path d="M0 450 C200 420 400 480 620 450 S900 430 1000 460 V520 H0z" fill="var(--hill-b)"/>
+      <path d="M100 310 C170 310 170 160 240 160 C310 160 310 320 380 320 C450 320 450 160 520 160 C590 160 590 320 660 320 C730 320 730 160 800 160 C870 160 870 320 910 320" fill="none" stroke="var(--gold-deep)" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round"/></svg>
+    ${WORLDS.map((w,i) => `<button class="node" style="--w:var(${w.col});left:${pts[i][0]}%;top:${pts[i][1]}%" data-world="${w.id}" aria-haspopup="dialog" aria-label="${esc(w.pillar)}: ${esc(w.name)}"><span class="dot">${ico(w.id)}</span><span class="nm">${esc(w.name.replace('The ',''))}</span></button>`).join('')}</div>`;
+}
+
+function renderHome() {
+  const cta = CONFIG.status==='launch-list' ? 'Join the Launch List' : 'Get Tickets';
+  return `
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Kingdom Story Festival</span>
+        <h1 id="h1">Where Books<br>Come to Life.</h1>
+        <p class="promise">Seven Worlds. Countless Stories. One King.</p>
+        <p class="lede" style="color:var(--ink)">Step into seven story worlds filled with faith, imagination, courage, and purpose. Meet the authors, discover the books, and begin a story of your own.</p>
+        <div class="row">
+          <a class="btn btn-gold" href="#join" data-cta="hero">${cta}</a>
+          <a class="btn btn-line" href="#worlds">Explore the Seven Worlds</a>
+        </div>
+        <div style="display:grid;gap:10px">
+          <a class="tlink" href="#authors">Bring Your Book to the Festival</a>
+          <span class="tba"><i></i>${esc(dateLine())}</span>
+        </div>
+      </div>
+      <div class="hero-art">${heroArt()}</div>
+    </div>
+    ${hills()}
+  </section>
+
+  <section class="s" aria-labelledby="gl-h"><div class="wrap">
+    <div class="sh"><span class="eyebrow">A glimpse of the experience</span><h2 id="gl-h">A festival you walk into, not just walk past.</h2></div>
+    <div class="glimpse">
+      <article><h3>Meet the authors.</h3><p class="muted">Talk with the people behind the books, face to face, at the Author Village.</p></article>
+      <article><h3>Step inside the stories.</h3><p class="muted">Live scenes, original characters, and music bring pages to their feet.</p></article>
+      <article><h3>Create something together.</h3><p class="muted">Families make their own pages, characters, and tiny books.</p></article>
+      <article><h3>Take the adventure home.</h3><p class="muted">Leave with books you chose, things you made, and a story to keep telling.</p></article>
+    </div>
+    <div class="scene"><span class="tag">Illustrative scene — imagined, not a report from a past event</span>
+      <q>A child hears a character speak, turns toward the stage, and recognizes the hero from the book in their hands.</q></div>
+  </div></section>
+
+  <section class="s alt" id="worlds-sec" aria-labelledby="wd-h"><div class="wrap">
+    <div class="sh"><span class="eyebrow">Explore the seven worlds</span><h2 id="wd-h">Seven worlds. Start anywhere.</h2>
+      <p class="lede">Each world celebrates a part of life where stories matter. Select one to see the books and activities we’re proposing.</p></div>
+    <div class="view-toggle" role="group" aria-label="Choose map or list view">
+      <button type="button" data-view="map" aria-pressed="true">Map view</button><button type="button" data-view="list" aria-pressed="false">List view</button></div>
+    <div class="map-wrap" id="map-wrap">${worldMap()}</div>
+    <div class="cards-wrap cards" id="cards-wrap" hidden>${worldCards()}</div>
+    <p class="note"><span class="tag todo">Proposed</span> Experiences are proposed and subject to production feasibility and confirmed programming. Nothing here means every attraction is booked.<br><br>
+      The Seven Mountains is our organizing Christian teaching framework for thinking about where people serve. It is not a list stated in Scripture. We frame influence as service, creativity, truth, stewardship, and love.</p>
+  </div></section>
+
+  <section class="s" aria-labelledby="sg-h"><div class="wrap">
+    <div class="sh"><span class="eyebrow">Signature experiences</span><h2 id="sg-h">Five things we want you to remember.</h2></div>
+    <div class="sig">
+      <article class="big"><span class="num-ic"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS.arts}</svg></span><h3>The Living Pages Stage</h3>
+        <p class="muted">One main stage where scenes adapted from participating books come to life with original characters and music. Scenes are chosen through editorial curation, with author permission, and depend on production.</p></article>
+      <article class="big"><span class="num-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>The Kingdom Story Quest Passport</h3>
+        <p class="muted">A passport that connects the seven worlds. <strong>Stamps come from taking part</strong> (hearing a story, trying an activity, meeting an author), never from buying anything.</p></article>
+      <article><span class="num-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V6l8-3v17M12 9l8 3v8"/></svg></span><h3>The Story Parade</h3><p class="muted">Characters and families walk between the worlds. Join in or watch from the side.</p></article>
+      <article><span class="num-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1-4L17 4l3 3L8 19z"/></svg></span><h3>“Your Story Matters” Studio</h3><p class="muted">A supervised creative space where guests make a page, a character, or a tiny book.</p></article>
+      <article><span class="num-ic"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS.family}</svg></span><h3>The Author Village</h3><p class="muted">Author tables grouped by world, so readers find books by the stories they love.</p></article>
+    </div>
+    <div class="pass" id="pass" aria-labelledby="pass-h">
+      <div><h3 id="pass-h" style="font-size:1.3rem">Try the passport</h3><p class="muted small">Tap a world to stamp it. This is an interactive sketch. At the festival, a stamp means you took part in something there.</p></div>
+      <div class="stamps">${WORLDS.map(w => `<button class="stamp" style="--w:var(${w.col})" data-stamp="${w.id}" aria-pressed="false"><span class="ring">${ico(w.id)}</span>${esc(w.pillar === 'Arts & Entertainment' ? 'Arts' : w.pillar)}</button>`).join('')}</div>
+      <p id="pass-msg" class="small muted" role="status">0 of 7 stamped. Purchases never earn stamps.</p></div>
+  </div></section>
+
+  <section class="s alt" aria-labelledby="ad-h"><div class="wrap">
+    <div class="sh"><span class="eyebrow">Choose your adventure</span><h2 id="ad-h">Where do you fit in the story?</h2></div>
+    <div class="adv">
+      <a class="first" href="#join" data-cta="adv-reader"><div><h3>Readers</h3><p class="muted" style="margin-top:8px">Find your next book and meet the people who wrote it.</p></div><span class="go">${CONFIG.status==='launch-list'?'Join the launch list':'Get tickets'}</span></a>
+      <a href="#join" data-cta="adv-family"><div><h3>Families</h3><p class="muted" style="margin-top:8px">Characters, puppets, and activities made for little ones and the people who love them.</p></div><span class="go">See family visit</span></a>
+      <a href="#authors"><div><h3>Authors</h3><p class="muted" style="margin-top:8px">Don’t just display your book. Invite readers into its world.</p></div><span class="go">Explore participation</span></a>
+      <a href="#authors-apply"><div><h3>Exhibitors</h3><p class="muted" style="margin-top:8px">Bring a book-related product, ministry, or service to families and readers.</p></div><span class="go">Apply to exhibit</span></a>
+      <a href="#sponsors"><div><h3>Sponsors</h3><p class="muted" style="margin-top:8px">Help create something meaningful for readers, families, and authors.</p></div><span class="go">See opportunities</span></a>
+    </div>
+  </div></section>
+
+  <section class="s" id="day" aria-labelledby="sd-h"><div class="wrap">
+    <div class="sh"><span class="eyebrow">A sample day</span><h2 id="sd-h">What a day could feel like.</h2></div>${sampleDay()}
+  </div></section>
+
+  ${ticketsSection()}
+
+  ${purposeSection()}
+
+  <section class="s alt" id="faq" aria-labelledby="fq-h"><div class="wrap narrow">
+    <div class="sh"><span class="eyebrow">Questions</span><h2 id="fq-h">Practical answers, and honest gaps.</h2></div>${faq()}
+  </div></section>
+
+  ${finalCta()}`;
+}
+function purposeSection() {
+  return `<section class="s" id="purpose" aria-labelledby="pp-h"><div class="wrap two">
+    <div class="sh" style="margin:0"><span class="eyebrow">Purpose and organizers</span><h2 id="pp-h">Stories strengthen faith, connect generations, develop gifts, and inspire service.</h2></div>
+    <div style="display:grid;gap:16px">
+      <p>The festival is a public, reader-and-family experience, rooted in the belief that a well-told story can help a person see God, a family, and a neighbor more clearly.</p>
+      <p>It is organized by the team behind <strong>Tell Your Story Coaching</strong> (books, coaching, and business education), <strong>Message Media / Mobilize Your Message Media</strong> (marketing and media), and <strong>Kingdom Book Awards</strong> (literary recognition).</p>
+      <p>Our conferences equip authors and entrepreneurs, and our awards recognize eligible work through their own criteria. This festival is separate from both, and from our existing April and November events. It is valuable without anyone buying coaching. Programs we are still developing, such as The New Kingdom Entrepreneur and Kingdom AI education, are not presented as operating here.</p>
+      <p class="small"><span class="tag todo">Needs organizer input</span> Organizer biographies, credentials, and past results will be added by the team. None are invented here.</p>
+    </div></div></section>`;
+}
+function finalCta() {
+  const lbl = CONFIG.status==='launch-list' ? 'Join the Launch List' : 'Get Tickets';
+  return `<section class="final" aria-labelledby="fn-h"><span class="eyebrow">Final invitation</span><h2 id="fn-h">The festival ends. Your story continues.</h2>
+    <p class="lede">Come ready to be surprised, and leave ready to tell what you saw.</p>
+    <a class="btn btn-gold" href="#join" data-cta="final">${lbl}</a>
+    <a class="tlink small" href="#authors">Authors, bring your book to the festival</a></section>`;
+}
+
+function renderVisit() {
+  return `<section class="s" aria-labelledby="v1"><div class="wrap">
+    <div class="sh"><span class="eyebrow">Plan your visit</span><h1 id="v1" style="font-size:clamp(2.2rem,5vw,3.6rem)">Everything you need, nothing you don’t.</h1>
+      <p class="lede">${esc(dateLine())}. We’ll fill in the practical details here as soon as they are confirmed.</p></div>
+    <div class="split">
+      <div><h3>What you can count on</h3><p class="muted">Seven story worlds to explore in any order, an Author Village, one main stage, a creative studio, a parade, and a passport earned by taking part. No quiz and no sign-up is needed to read any of this.</p></div>
+      <div><h3>Still to be confirmed</h3><ul class="ck">${['Date and times','Venue, address, and arrival','Parking and transit','Accessibility details','Food and allergen information','Photography preferences','Ticket policies and refunds'].map(x=>`<li>${check_ic()}${x} <span class="tag todo" style="margin-left:6px">TBA</span></li>`).join('')}</ul></div>
+    </div></div></section>
+  <section class="s alt" id="day" aria-labelledby="sd-h"><div class="wrap"><div class="sh"><span class="eyebrow">A sample day</span><h2 id="sd-h">What a day could feel like.</h2></div>${sampleDay()}</div></section>
+  ${ticketsSection()}
+  <section class="s" aria-labelledby="pr-h"><div class="wrap narrow"><div class="sh"><span class="eyebrow">Getting ready</span><h2 id="pr-h">A simple preparation list.</h2></div>
+    <ul class="ck" style="gap:8px">${['Decide who you’re coming with and agree on a meeting spot.','Think about a book or story you love; you may meet someone like its author.','Plan breaks. A day of wonder is still a day.','Bring a bag for books and anything your family creates.','Check this page again close to the date for confirmed details.'].map(x=>`<li>${check_ic()}${x}</li>`).join('')}</ul></div></section>
+  <section class="s alt" id="faq" aria-labelledby="fq-h"><div class="wrap narrow"><div class="sh"><span class="eyebrow">Questions</span><h2 id="fq-h">Practical answers, and honest gaps.</h2></div>${faq()}</div></section>
+  ${finalCta()}`;
+}
+
+/* ---------- Authors ---------- */
+function worldOpts(first='Choose a world') { return [['',first], ...WORLDS.map(w => [w.id, w.pillar+' — '+w.name]), ['unsure','Not sure yet']]; }
+function renderAuthors() {
+  const closed = !CONFIG.applicationsOpen;
+  return `
+  <section class="s" aria-labelledby="a1"><div class="wrap">
+    <div class="sh"><span class="eyebrow">For authors and exhibitors</span>
+      <h1 id="a1" style="font-size:clamp(2.2rem,5.4vw,4rem);max-width:18ch">Don’t just display your book. Invite readers into its world.</h1>
+      <p class="lede">A table gets your book seen. A story world gets it remembered. Here is how we’re proposing authors can take part.</p>
+      <div class="row"><a class="btn btn-gold" href="#authors-apply">Apply to Participate</a><a class="tlink" href="#worlds">See the seven worlds</a></div></div>
+  </div></section>
+
+  <section class="s alt" aria-labelledby="ap-h"><div class="wrap">
+    <div class="sh"><span class="eyebrow">Participation options</span><h2 id="ap-h">Three ways to take part.</h2><p class="lede">Inclusions and pricing are configurable and not yet approved. Nothing is for sale today.</p></div>
+    <div class="pk">
+      <article><span class="tag todo">Proposed</span><h3>Author Table</h3><p class="muted">A place in the Author Village near your story world.</p>
+        <ul><li>Table in the Author Village [size and furniture TBD]</li><li>Listing in the festival guide [format TBD]</li><li>Your book in a world that fits it</li></ul><p class="small muted">Price: to be announced.</p></article>
+      <article><span class="tag todo">Proposed</span><h3>Author Story Encounter</h3><p class="muted">A short, scheduled moment to bring your book to life for a small audience.</p>
+        <ul><li>A timed encounter in or near your world [length TBD]</li><li>Simple staging help [TBD]</li><li>Subject to editorial curation and production</li></ul><p class="small muted">Selection is by the organizers. Not available to buy.</p></article>
+      <article><span class="tag todo">Proposed</span><h3>Author Media Package</h3><p class="muted">Optional promotional content created with the Story Studio team.</p>
+        <ul><li>Interview or short video [format TBD]</li><li>Delivered to you to share</li><li>Clearly labeled as a paid promotion</li></ul><p class="small muted">Price: to be announced.</p></article>
+    </div>
+    <div class="split" style="margin-top:28px">
+      <div><h3>Paid promotion</h3><p class="muted">Tables and media packages are paid promotional participation. They help cover the costs of the festival and the visibility they give your book is yours to use.</p></div>
+      <div><h3>Curated editorial programming</h3><p class="muted">Stage scenes and story encounters are chosen by the organizers for fit, quality, and the audience, <em>independent of what anyone paid</em>.</p></div>
+    </div>
+    <p class="note"><strong>What a table does not promise:</strong> stage selection, media reach, book sales, or award recognition. Kingdom Book Awards judges eligible work by its own criteria, and festival participation neither helps nor hurts an entry.</p>
+  </div></section>
+
+  <section class="s" aria-labelledby="rv-h"><div class="wrap two">
+    <div class="sh" style="margin:0"><span class="eyebrow">How applications are reviewed</span><h2 id="rv-h">A person reads every application.</h2></div>
+    <div style="display:grid;gap:14px"><p>The organizing team reads each application and considers fit with the story worlds, family suitability, and available space. You will hear back from a real person.</p>
+      <p class="small"><span class="tag todo">Organizer input needed</span> Specific acceptance criteria and response deadlines are not set, so none are promised here. No manuscript is needed at this stage.</p></div>
+  </div></section>
+
+  <section class="s alt" id="apply" aria-labelledby="fm-h"><div class="wrap two">
+    <div class="sh" style="margin:0"><span class="eyebrow">Apply</span><h2 id="fm-h">Tell us about your book.</h2>
+      <p class="lede">About five minutes. You don’t need to upload a manuscript. Applying doesn’t guarantee a place and doesn’t commit you to pay.</p>
+      ${closed?'<p class="status">Applications are not open yet. Join the launch list to hear when they are.</p>':''}</div>
+    <div class="panel"><form id="au-form" data-group="au-int">
+      ${field({id:'au-name',label:'Author name',req:true,ac:'name'})}
+      ${field({id:'au-email',label:'Email',type:'email',req:true,ac:'email'})}
+      ${field({id:'au-title',label:'Book title',req:true})}
+      ${field({id:'au-genre',label:'Genre',req:true,opts:[['','Choose a genre'],['devotional','Devotional / Christian living'],['children','Children’s / picture book'],['family','Parenting / marriage / family'],['fiction','Fiction'],['poetry','Poetry / music'],['nonfiction','Nonfiction / history / science'],['business','Business / leadership'],['memoir','Memoir / testimony'],['other','Other']]})}
+      ${field({id:'au-desc',label:'Brief description',req:true,rows:4,hint:'Two or three sentences about the book.',})}
+      ${field({id:'au-reader',label:'Intended reader',req:true,hint:'Who is this book for?'})}
+      ${field({id:'au-web',label:'Website',type:'url',hint:'Starts with https://'})}
+      ${field({id:'au-world',label:'Preferred story world',req:true,opts:worldOpts(),value:state.prefWorld})}
+      <fieldset><legend>Participation interest <span class="req" aria-hidden="true">*</span></legend>
+        <div class="checks">${[['table','Author Table'],['encounter','Author Story Encounter'],['media','Author Media Package'],['exhibit','Exhibitor table (not an author)'],['unsure','Not sure yet']].map(o=>check('au-int-'+o[0], o[1]).replace('name="au-int-'+o[0]+'"','name="au-int"')).join('')}</div>
+        <div class="err" id="grp-e" hidden></div></fieldset>
+      ${field({id:'au-need',label:'Accessibility or setup needs',rows:3,hint:'Anything that would help you take part. Never an extra charge for basic accommodations.'})}
+      ${formStatus('au-form')}
+      <button class="btn btn-gold" type="submit" ${closed?'disabled':''}>Submit application</button>
+      ${demoNote('A production version validates and stores this on the server before it says it was received.')}
+    </form></div></section>
+  ${finalCta()}`;
+}
+function bindAuthors() {
+  bindForm('au-form', { 'au-name':{req:true}, 'au-email':{req:true,email:true}, 'au-title':{req:true}, 'au-genre':{req:true}, 'au-desc':{req:true,min:20}, 'au-reader':{req:true}, 'au-web':{url:true}, 'au-world':{req:true} }, d => {
+    state.submitted.author = { name:d['au-name'], title:d['au-title'] };
+    track('author_application_completed_demo', { world:d['au-world'] });
+    location.hash = 'confirm-author';
+  });
+}
+
+/* ---------- Sponsors ---------- */
+function renderSponsors() {
+  const opps = [
+   ['Festival Partner','The broadest relationship with the festival as a whole.',['Recognition across festival materials [placement TBD]','A hosted presence at an agreed activity','Planning conversation with the organizers']],
+   ['Story World Partner','Sponsor one of the seven worlds and help it come alive.',['Named association with one world [terms TBD]','Opportunity to support a specific activity there','Alignment with the world’s theme, reviewed together']],
+   ['Family Experience Partner','Support the activities that welcome children and parents.',['Support for family activities and materials','Recognition in the Family Storyhouse [TBD]','Optional volunteer participation']],
+   ['Story Passport Partner','Help produce the passport and its stamps.',['Recognition on the passport [format TBD]','Support for printed materials','No influence over how stamps are earned']],
+   ['Community Access Partner','Help more families come: sponsored access and accommodations.',['Fund admission or access for families who need it','Support for accessibility resources','Recognition, shaped with the organizers']]
+  ];
+  return `
+  <section class="s" aria-labelledby="s1"><div class="wrap">
+    <div class="sh"><span class="eyebrow">For sponsors</span><h1 id="s1" style="font-size:clamp(2.2rem,5.4vw,4rem);max-width:18ch">Help a family meet a story they’ll carry for life.</h1>
+      <p class="lede">We’re looking for partners who want to make something specific possible: a stage scene, a family activity, access for a family that couldn’t otherwise come. Not a logo on a banner.</p>
+      <div class="row"><a class="btn btn-gold" href="#sponsors-inquire">Start a Sponsor Conversation</a></div></div></div></section>
+  <section class="s alt" aria-labelledby="so-h"><div class="wrap">
+    <div class="sh"><span class="eyebrow">Opportunities</span><h2 id="so-h">Five ways to take part.</h2><p class="lede">Everything below is proposed. We don’t quote audience numbers, impressions, or guaranteed outcomes.</p></div>
+    <div class="pk5">${opps.map(o=>`<article class="panel" style="box-shadow:none;display:grid;gap:12px;align-content:start"><span class="tag todo">Proposed</span><h3>${o[0]}</h3><p class="muted">${o[1]}</p>
+      <div><strong class="small">Potential deliverables</strong><ul style="margin:6px 0 0;padding-left:1.1rem;display:grid;gap:3px">${o[2].map(x=>`<li>${x}</li>`).join('')}</ul></div></article>`).join('')}</div>
+    <p class="note"><strong>Independence:</strong> sponsorship cannot buy award wins or independent editorial endorsement. Kingdom Book Awards decisions and festival curation stay separate from sponsor relationships.</p>
+  </div></section>
+  <section class="s" id="inquire" aria-labelledby="sf-h"><div class="wrap two">
+    <div class="sh" style="margin:0"><span class="eyebrow">Sponsor inquiry</span><h2 id="sf-h">Tell us what you have in mind.</h2><p class="lede">A member of the team will follow up personally. An inquiry isn’t a commitment.</p>
+      ${CONFIG.sponsorInquiriesOpen?'':'<p class="status">Sponsor inquiries are not open yet.</p>'}</div>
+    <div class="panel"><form id="sp-form">
+      ${field({id:'sp-org',label:'Organization',req:true,ac:'organization'})}
+      ${field({id:'sp-name',label:'Contact name',req:true,ac:'name'})}
+      ${field({id:'sp-email',label:'Email',type:'email',req:true,ac:'email'})}
+      ${field({id:'sp-int',label:'Interest',req:true,opts:[['','Choose one'],['festival','Festival Partner'],['world','Story World Partner'],['family','Family Experience Partner'],['passport','Story Passport Partner'],['access','Community Access Partner'],['unsure','Not sure yet']]})}
+      ${field({id:'sp-budget',label:'Budget range',hint:'Optional. A rough range helps us suggest something that fits.',opts:[['','Prefer not to say'],['u2','Under $2,500'],['2-5','$2,500 to $5,000'],['5-15','$5,000 to $15,000'],['15+','$15,000 or more'],['talk','Let’s talk first']]})}
+      ${field({id:'sp-msg',label:'Anything we should know',rows:3})}
+      ${formStatus('sp-form')}
+      <button class="btn btn-gold" type="submit" ${CONFIG.sponsorInquiriesOpen?'':'disabled'}>Send inquiry</button>
+      ${demoNote()}
+    </form></div></div></section>
+  ${finalCta()}`;
+}
+function bindSponsors() {
+  bindForm('sp-form', { 'sp-org':{req:true}, 'sp-name':{req:true}, 'sp-email':{req:true,email:true}, 'sp-int':{req:true} }, d => {
+    state.submitted.sponsor = { org:d['sp-org'], name:d['sp-name'] };
+    track('sponsor_inquiry_completed_demo', { interest:d['sp-int'] });
+    location.hash = 'confirm-sponsor';
+  });
+}
+
+/* ---------- Confirmations ---------- */
+function demoRibbon(sub) {
+  return `<div class="demo-ribbon" role="note"><span class="tag demo" style="flex:none">Demo</span><p class="small">${sub ? 'This is a demo confirmation. Nothing was saved, charged, or emailed.' : 'You’re viewing this page directly. No form was submitted. Nothing was saved, charged, or emailed.'}</p></div>`;
+}
+function shareBlock() {
+  return `<div class="panel" style="box-shadow:none"><h3 style="font-size:1.3rem">Optional: tell a friend</h3><p class="muted small" style="margin:6px 0 14px">If you think someone you know would love this, you can share it. Entirely up to you.</p>
+    <div class="row"><button class="btn btn-line btn-sm" type="button" data-copy="share-text">Copy a short message</button><span id="share-text" class="small muted" style="flex:1;min-width:220px">I’m keeping an eye on the Kingdom Story Festival, a book festival where stories come to life for families. Details soon.</span></div></div>`;
+}
+function renderConfirmReader() {
+  const s = state.submitted.reader, first = s && s.first ? esc(s.first) : '';
+  const t = s && s.kind==='tickets';
+  const head = s ? (t ? `Here’s what you would see after reserving${first?', '+first:''}.` : `Here’s what you would see after joining${first?', '+first:''}.`) : 'A preview of the reader and family confirmation.';
+  return `<section class="confirm wrap narrow" aria-labelledby="c1">${demoRibbon(!!s)}
+    <div class="sh" style="margin:0"><span class="eyebrow">${t?'Order confirmation (demo)':'Launch list (demo)'}</span><h1 id="c1" style="font-size:clamp(2rem,4.6vw,3.2rem)">${head}</h1>
+    <p class="lede">${t?`Demo order: ${esc(s.tier)} × ${s.qty}, total ${money(s.total)}. No payment was taken.`:'In the live version, this page confirms your request was stored and tells you exactly what comes next.'}</p></div>
+    <div><h3 style="margin-bottom:12px">What happens next</h3><ol class="steps">
+      <li><span class="n">1</span><div><strong>A confirmation email</strong><p class="muted small">In production, sent from the server only after your request is stored.</p></div></li>
+      <li><span class="n">2</span><div><strong>A preview of the worlds</strong><p class="muted small">A short note about what you can explore.</p></div></li>
+      <li><span class="n">3</span><div><strong>Practical details</strong><p class="muted small">Date, place, arrival, and accessibility, once confirmed.</p></div></li>
+      <li><span class="n">4</span><div><strong>A reminder before the festival</strong><p class="muted small">Only if dates are confirmed.</p></div></li></ol></div>
+    <div class="panel" style="box-shadow:none"><h3 style="font-size:1.3rem">Add to your calendar</h3><p class="muted small" style="margin:6px 0 12px">${CONFIG.dates?'Add the festival to your calendar.':'Calendar tools appear here once the date is confirmed. No date is announced yet.'}</p>
+      <button class="btn btn-line btn-sm" type="button" ${CONFIG.dates?'':'disabled aria-disabled="true"'}>Add to calendar</button></div>
+    ${shareBlock()}
+    <div class="row"><a class="btn btn-gold" href="#worlds">Explore the Seven Worlds</a><a class="tlink" href="#visit">Plan your visit</a></div></section>`;
+}
+function renderConfirmAuthor() {
+  const s = state.submitted.author;
+  return `<section class="confirm wrap narrow" aria-labelledby="c1">${demoRibbon(!!s)}
+    <div class="sh" style="margin:0"><span class="eyebrow">Author application (demo)</span><h1 id="c1" style="font-size:clamp(2rem,4.6vw,3.2rem)">${s?`Here’s what you would see after applying${s.title?' with “'+esc(s.title)+'”':''}.`:'A preview of the author confirmation.'}</h1>
+      <p class="lede">The live version shows “received” only after the application is stored on the server. Receipt is not acceptance.</p></div>
+    <div><h3 style="margin-bottom:12px">Next steps</h3><ol class="steps">
+      <li><span class="n">1</span><div><strong>Receipt email</strong><p class="muted small">Confirms we have your application.</p></div></li>
+      <li><span class="n">2</span><div><strong>Review by the team</strong><p class="muted small">A person reads it. Criteria and timing have not been set, so we don’t promise a date here.</p></div></li>
+      <li><span class="n">3</span><div><strong>A personal decision</strong><p class="muted small">Never automatic. You’ll be told what is offered, if anything, and what it costs, before you commit.</p></div></li>
+      <li><span class="n">4</span><div><strong>Onboarding, if invited</strong><p class="muted small">A preparation checklist and setup details.</p></div></li></ol></div>
+    <p class="small muted">Questions? ${esc(CONFIG.contact.email)}</p>
+    <div class="row"><a class="btn btn-gold" href="#home">Back to the festival</a><a class="tlink" href="#sponsors">For sponsors</a></div></section>`;
+}
+function renderConfirmSponsor() {
+  const s = state.submitted.sponsor;
+  return `<section class="confirm wrap narrow" aria-labelledby="c1">${demoRibbon(!!s)}
+    <div class="sh" style="margin:0"><span class="eyebrow">Sponsor inquiry (demo)</span><h1 id="c1" style="font-size:clamp(2rem,4.6vw,3.2rem)">${s?`Here’s what you would see after inquiring${s.org?' for '+esc(s.org):''}.`:'A preview of the sponsor confirmation.'}</h1>
+      <p class="lede">The live version confirms receipt only after the inquiry is stored.</p></div>
+    <div><h3 style="margin-bottom:12px">How we follow up</h3><ol class="steps">
+      <li><span class="n">1</span><div><strong>Receipt email</strong><p class="muted small">So you know it reached us.</p></div></li>
+      <li><span class="n">2</span><div><strong>A personal reply</strong><p class="muted small">From a team member, not an automation. No response time is promised here.</p></div></li>
+      <li><span class="n">3</span><div><strong>A conversation</strong><p class="muted small">About what you hope to make possible and what is realistic.</p></div></li></ol></div>
+    <div class="row"><a class="btn btn-gold" href="#home">Back to the festival</a></div></section>`;
+}
+
+/* ---------- Draft emails ---------- */
+const EMAILS = {
+ Readers:[
+  ['1. Welcome','You’re on the list for Kingdom Story Festival','Hi [FIRST NAME],\n\nThank you for joining the launch list for Kingdom Story Festival: a book festival where families and readers step into stories.\n\nHere is what to know today:\n• We have not announced a date or venue yet.\n• We will write when we have something real to share.\n• You can leave the list any time: [UNSUBSCRIBE LINK].\n\nUntil then, take a look at the seven worlds: [LINK TO WORLDS].\n\nWith gratitude,\n[SENDER NAME]\n[ORGANIZATION] · [CONTACT EMAIL]'],
+  ['2. Experience preview','A peek inside the seven worlds','Hi [FIRST NAME],\n\nImagine a child hearing a character speak, turning toward the stage, and recognizing the hero from the book in their hands. That is the kind of moment we are designing for.\n\nOne of the worlds we are planning: [WORLD NAME]. [ONE SENTENCE FROM CONFIRMED PROGRAM ONLY].\n\nEverything is subject to final programming. We will tell you what is confirmed.\n\nSee the worlds: [LINK]\n\n[SENDER NAME]'],
+  ['3. Practical preparation','Planning your visit: what to know','Hi [FIRST NAME],\n\nHere are the practical details we have confirmed:\n• Date and time: [CONFIRMED DATE/TIME]\n• Place: [VENUE, ADDRESS]\n• Parking: [DETAILS]\n• Accessibility: [DETAILS]\n• Food: [DETAILS]\n\nChildren stay with a parent or responsible adult.\n\nQuestions? Reply to this email.\n\n[SENDER NAME]'],
+  ['4. Reminder','Kingdom Story Festival is almost here','Hi [FIRST NAME],\n\nA friendly reminder that the festival is on [DATE] at [VENUE].\n\nDoors open at [TIME]. Your Story Passport will be waiting at the entrance.\n\nAdd it to your calendar: [LINK]\nGetting here: [LINK]\n\nSee you soon,\n[SENDER NAME]'],
+  ['5. Thank-you','Thank you for being part of the story','Hi [FIRST NAME],\n\nThank you for coming. We hope you left with a book you’re excited to read, something you made, and a story to keep telling.\n\nIf you would like to share what the day meant to you, reply to this email. We read every message.\n\nThe festival ends. Your story continues.\n\n[SENDER NAME]']],
+ Authors:[
+  ['1. Application receipt','We received your application','Hi [AUTHOR NAME],\n\nThank you for applying with “[BOOK TITLE]”. This email confirms we received your application. It does not mean you have been accepted.\n\nA member of the team will read it and be in touch personally.\n\n[SENDER NAME] · [CONTACT EMAIL]'],
+  ['2a. Decision: invitation','An invitation to take part','Hi [AUTHOR NAME],\n\nThank you for applying. We would be glad to invite “[BOOK TITLE]” to take part as: [APPROVED OPTION].\n\nWhat this includes: [APPROVED INCLUSIONS]\nCost, if any: [APPROVED PRICE]\nWhat it does not include: stage selection, media reach, sales, or award recognition are not guaranteed.\n\nTo accept, reply by [DATE] or use this link: [LINK].\n\n[SENDER NAME]'],
+  ['2b. Decision: waitlist','Your application is on our waiting list','Hi [AUTHOR NAME],\n\nThank you for applying with “[BOOK TITLE]”. We have more interest than space in [WORLD NAME] right now, so we have placed you on a waiting list.\n\nWe will tell you as soon as anything changes.\n\n[SENDER NAME]'],
+  ['2c. Decision: not this time','About your application','Hi [AUTHOR NAME],\n\nThank you for applying with “[BOOK TITLE]”. We are not able to offer a place at this festival.\n\nThis is not a judgment on your book. [OPTIONAL: other ways to take part.]\n\nWe appreciate you.\n\n[SENDER NAME]'],
+  ['3. Onboarding','Welcome: next steps for [BOOK TITLE]','Hi [AUTHOR NAME],\n\nWelcome. Here is what happens next:\n1. Confirm your details: [LINK]\n2. Agree to participation terms: [LINK]\n3. Review setup details for your [TABLE/ENCOUNTER]: [DETAILS]\n\nContact: [NAME, EMAIL]\n\n[SENDER NAME]'],
+  ['4. Preparation checklist','Your festival preparation checklist','Hi [AUTHOR NAME],\n\nA short checklist:\n☐ Books and inventory plan\n☐ Payment method for sales\n☐ Signage and display materials\n☐ A one-minute introduction to your book\n☐ Child-safe, family-friendly content check\n☐ Arrival and load-in time: [TIME]\n☐ Accessibility or setup needs confirmed\n\nSee you at the festival,\n[SENDER NAME]']],
+ Sponsors:[
+  ['1. Inquiry receipt','We received your sponsor inquiry','Hi [CONTACT NAME],\n\nThank you for your interest in partnering with Kingdom Story Festival. This confirms we received your inquiry for [ORGANIZATION].\n\nA member of our team will follow up personally.\n\n[SENDER NAME] · [CONTACT EMAIL]'],
+  ['2. Human follow-up (template)','Following up on your sponsor inquiry','Hi [CONTACT NAME],\n\nThank you for reaching out about [INTEREST]. I’d love to hear more about what you hope to make possible for readers and families.\n\nCould we find 20 minutes? Here are a few times: [OPTIONS].\n\nA note so expectations are clear: sponsorship does not buy award wins or independent editorial endorsement, and we do not guarantee audience numbers.\n\n[SENDER NAME]']]
+};
+function renderEmails() {
+  const groups = Object.keys(EMAILS);
+  return `<section class="s"><div class="wrap">
+    <div class="sh"><span class="eyebrow">Follow-up copy</span><h1 style="font-size:clamp(2.2rem,5vw,3.6rem)" id="e1">Draft email sequences.</h1>
+      <div class="demo-ribbon"><span class="tag todo" style="flex:none">Drafts</span><p class="small"><strong>Copy drafts only.</strong> Nothing here is sent, scheduled, or connected to an email service. [BRACKETS] must be replaced with confirmed information before use. A connected automation would send server-side through Resend.</p></div></div>
+    <div class="tabs" role="tablist" aria-label="Email audience">${groups.map((g,i)=>`<button role="tab" id="tab-${g}" aria-selected="${i===0}" aria-controls="panel-${g}" data-tab="${g}" tabindex="${i===0?0:-1}">${g}</button>`).join('')}</div>
+    ${groups.map((g,gi)=>`<div role="tabpanel" id="panel-${g}" aria-labelledby="tab-${g}" ${gi?'hidden':''}>${EMAILS[g].map((m,i)=>`<article class="mail"><header><h4>${esc(m[0])}</h4><span class="tag todo">Draft · not sent</span></header>
+      <p class="small"><strong>Subject:</strong> ${esc(m[1])}</p><pre id="m-${g}-${i}">${esc(m[2])}</pre><div><button class="btn btn-line btn-sm" type="button" data-copy="m-${g}-${i}">Copy email body</button></div></article>`).join('')}</div>`).join('')}
+  </div></section>`;
+}
+
+/* ---------- Launch Kit (organizer notes) ---------- */
+function renderLaunchKit() {
+  const rows = [
+   ['Navigation, routing, and all pages','Functional','Hash-routed single-page preview.'],
+   ['Seven-world map, list, and detail panel','Functional',''],
+   ['Passport sketch','Functional (illustrative)','Stamps live only in this tab.'],
+   ['Event-status switch (launch list / tickets)','Functional','Driven by CONFIG.status; the bar at the top is a preview control.'],
+   ['Form validation and accessible errors','Functional','Client-side only.'],
+   ['Saving registrations, applications, inquiries','Simulated','No server. Nothing is stored.'],
+   ['Ticket totals','Simulated','Demo prices for layout testing only.'],
+   ['Checkout and payment','Simulated','No Stripe connected. No payment fields exist.'],
+   ['Confirmation emails and sequences','Copy drafts only','Nothing sent or scheduled.'],
+   ['Analytics','Simulated','In-memory event log below. No pixels installed.'],
+   ['Calendar tools','Disabled','Until dates are confirmed.']
+  ];
+  const missing = ['Festival date(s) and times','Venue, address, parking, and transit','Approved ticket types, prices, fees, and benefits','Exactly what Premium adds','Refund, change, and cancellation policies','Accessibility details','Photography policy','Age and child-supervision policy','Food and allergen information','Author package inclusions and pricing','Author acceptance criteria and response timeline','Sponsor package terms','Confirmed attractions and performers','Organizer bios and verified credentials','Contact email and phone','Privacy policy, terms, and consent language','Trademark / name availability check','Insurance and venue contract'];
+  const prod = ['Server-side validation and storage for every form (Netlify Functions to Supabase)','Protected admin access (Supabase Auth, role-checked)','Row-level security so the attendee list is never publicly readable','Stripe-hosted Checkout created server-side, with the full total shown first','Verified, idempotent Stripe webhooks that mark orders paid','Server-side confirmation emails via Resend, only after storage succeeds','Separate, unchecked marketing-consent field with timestamp','Privacy policy, data retention schedule, and children’s-data review','No secret keys in browser code; environment variables only'];
+  const meas = [
+   ['Primary CTA clicks','cta_click','Which placement (hero, final, nav)'],['World exploration','world_opened','World id'],['Ticket selections','ticket_selected','Tier id, quantity'],['Completed registrations','registration_completed','Kind (launch list / tickets)'],['Author applications','author_application_completed','Preferred world'],['Sponsor inquiries','sponsor_inquiry_completed','Interest'],['Checkout abandonment','checkout_abandoned','Step left, tier']];
+  return `<section class="s"><div class="wrap" style="display:grid;gap:56px;grid-template-columns:minmax(0,1fr)">
+    <div class="sh" style="margin:0"><span class="eyebrow">Organizer notes</span><h1 id="k1" style="font-size:clamp(2.2rem,5vw,3.6rem)">Launch kit.</h1>
+      <p class="lede">This is a working preview. It is not a deployed website, not production-ready, and not taking registrations.</p>
+      <div class="row"><a class="btn btn-line btn-sm" href="#emails">Draft emails</a><a class="btn btn-line btn-sm" href="#confirm-reader">Reader confirmation</a><a class="btn btn-line btn-sm" href="#confirm-author">Author confirmation</a><a class="btn btn-line btn-sm" href="#confirm-sponsor">Sponsor confirmation</a></div></div>
+    <div><h2 style="font-size:1.8rem;margin-bottom:16px">Functional vs. simulated</h2><div class="tbl"><table><thead><tr><th>Feature</th><th>Status</th><th>Note</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td><strong>${r[1]}</strong></td><td>${r[2]}</td></tr>`).join('')}</tbody></table></div></div>
+    <div class="two"><div><h2 style="font-size:1.8rem;margin-bottom:16px">Missing launch information</h2><ul class="ck">${missing.map((m,i)=>`<li>${check('mk'+i,esc(m))}</li>`).join('')}</ul></div>
+      <div><h2 style="font-size:1.8rem;margin-bottom:16px">Remaining production work</h2><ul class="ck">${prod.map(p=>`<li>${check_ic()}${p}</li>`).join('')}</ul>
+      <p class="small muted" style="margin-top:14px">Stack stays Netlify, Supabase, Stripe, Resend. No replacement is needed.</p></div></div>
+    <div><h2 style="font-size:1.8rem;margin-bottom:16px">Proposed measurement plan</h2><div class="tbl"><table><thead><tr><th>What to learn</th><th>Event</th><th>Detail</th></tr></thead><tbody>${meas.map(r=>`<tr><td>${r[0]}</td><td><code>${r[1]}</code></td><td>${r[2]}</td></tr>`).join('')}</tbody></table></div>
+      <p class="small muted" style="margin-top:12px">No tracking or advertising pixels are installed. Recommend first-party, server-side events; any ad pixel needs approval and consent. Below is the in-memory log from this preview session only.</p>
+      <div class="cfg" id="evlog" style="margin-top:12px;max-height:200px"></div></div>
+    <div><h2 style="font-size:1.8rem;margin-bottom:16px">Configuration</h2><p class="small muted" style="margin-bottom:10px">The single place to edit event facts. Lives at the top of the page script as <code>CONFIG</code>.</p><div class="cfg">${esc(JSON.stringify({...CONFIG, tickets:CONFIG.tickets.map(t=>({id:t.id,name:t.name,approved:t.approved,price:t.price}))}, null, 2))}</div></div>
+    <div><h2 style="font-size:1.8rem;margin-bottom:16px">Accessibility and link checks</h2><ul class="ck">${['Skip link, landmarks, and one h1 per page','Visible focus on every control','Labeled form fields with inline errors and a live status','44px minimum tap targets','Reduced-motion respected','Light and dark themes with readable contrast','Keyboard-operable map, list, dialog, tabs, and FAQ','All internal routes resolve: home, visit, join, worlds, authors, authors-apply, sponsors, sponsors-inquire, confirm-reader, confirm-author, confirm-sponsor, emails, launch-kit'].map(p=>`<li>${check_ic()}${p}</li>`).join('')}</ul>
+      <p class="small muted" style="margin-top:12px">Items above are design intent. A formal audit with assistive technology on real devices is still needed.</p></div>
+  </div></section>`;
+}
+
+/* ============================================================
+   DIALOG
+   ============================================================ */
+let lastOpener = null;
+function openWorld(id, opener) {
+  const w = worldById(id), dlg = $('#dlg'); lastOpener = opener;
+  track('world_opened', { world:id });
+  dlg.style.setProperty('--w', `var(${w.col})`);
+  dlg.innerHTML = `<button class="dlg-x" type="button" aria-label="Close" data-close>×</button>
+    <div class="dlg-top"><span class="dlg-ic">${ico(w.id)}</span><span class="eyebrow">${esc(w.pillar)}</span><h2 id="dlg-title" style="font-size:clamp(1.7rem,4vw,2.3rem)">${esc(w.name)}</h2><span class="tag todo">Proposed</span></div>
+    <div class="dlg-body">
+      <div><h4>What this world celebrates</h4><p>${esc(w.celebrates)}</p></div>
+      <div><h4>Books you might discover</h4><ul>${w.books.map(b=>`<li>${b}</li>`).join('')}</ul></div>
+      <div><h4>Proposed activities</h4><ul>${w.acts.map(b=>`<li>${b}</li>`).join('')}</ul></div>
+      <div class="dlg-scene"><span class="tag" style="margin-bottom:8px">Illustrative scene</span><br>${esc(w.scene)}</div>
+      <p class="small muted">Subject to production feasibility and confirmed programming.</p>
+      <div class="row"><a class="btn btn-gold" href="#join" data-close>${CONFIG.status==='launch-list'?'Join the Launch List':'Get Tickets'}</a>
+        <a class="btn btn-line" href="#authors-apply" data-pref="${w.id}" data-close>${esc(w.authorLine)}</a></div>
+    </div>`;
+  dlg.showModal();
+}
+document.addEventListener('click', e => {
+  const dlg = $('#dlg');
+  const a = e.target.closest('[data-close]');
+  if (a && dlg.open) { if (a.dataset.pref) state.prefWorld = a.dataset.pref; dlg.close(); }
+  if (e.target === dlg) dlg.close();
+});
+$('#dlg').addEventListener('close', () => { if (lastOpener && document.contains(lastOpener)) lastOpener.focus(); });
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+const ROUTES = {
+  home:{ r:renderHome, title:'Kingdom Story Festival' },
+  worlds:{ r:renderHome, scroll:'worlds-sec', title:'Explore the Worlds' },
+  visit:{ r:renderVisit, title:'Plan Your Visit' },
+  join:{ r:renderVisit, scroll:'tickets', title:'Join the Launch List' },
+  authors:{ r:renderAuthors, title:'For Authors' },
+  'authors-apply':{ r:renderAuthors, scroll:'apply', title:'Apply as an Author' },
+  sponsors:{ r:renderSponsors, title:'For Sponsors' },
+  'sponsors-inquire':{ r:renderSponsors, scroll:'inquire', title:'Sponsor Inquiry' },
+  'confirm-reader':{ r:renderConfirmReader, title:'Confirmation' },
+  'confirm-author':{ r:renderConfirmAuthor, title:'Application Confirmation' },
+  'confirm-sponsor':{ r:renderConfirmSponsor, title:'Inquiry Confirmation' },
+  emails:{ r:renderEmails, title:'Draft Emails' },
+  'launch-kit':{ r:renderLaunchKit, title:'Launch Kit' }
+};
+const NAVMAP = { home:'', worlds:'worlds', visit:'visit', join:'visit', authors:'authors', 'authors-apply':'authors', sponsors:'sponsors', 'sponsors-inquire':'sponsors' };
+let firstRender = true;
+function route() {
+  const key = (location.hash || '#home').slice(1);
+  const def = ROUTES[key] || ROUTES.home, rk = ROUTES[key] ? key : 'home';
+  $('#main').innerHTML = def.r();
+  $('#nav-cta').textContent = ctaLabel();
+  $('#nav').classList.remove('open'); $('#menu-btn').setAttribute('aria-expanded','false');
+  $$('[data-nav]').forEach(a => { NAVMAP[rk] === a.dataset.nav ? a.setAttribute('aria-current','page') : a.removeAttribute('aria-current'); });
+  $$('[data-status]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.status === CONFIG.status)));
+  document.title = (rk==='home' ? '' : def.title + ' · ') + 'Kingdom Story Festival';
+  bindPage(rk);
+  const target = def.scroll && $('#'+def.scroll);
+  if (target) { target.scrollIntoView({ behavior: reduceMotion()?'auto':'smooth', block:'start' }); }
+  else window.scrollTo(0,0);
+  if (!firstRender) { announce(def.title); if (!target) $('#main').focus({ preventScroll:true }); }
+  firstRender = false;
+  track('page_view', { route:rk });
+}
+function bindPage(rk) {
+  // world interactions
+  $$('[data-world]').forEach(b => b.addEventListener('click', () => openWorld(b.dataset.world, b)));
+  const mapWrap = $('#map-wrap'), cards = $('#cards-wrap');
+  if (mapWrap) {
+    const narrow = matchMedia('(max-width:720px)').matches;
+    const setView = v => { mapWrap.hidden = v==='list'; cards.hidden = v==='map'; $$('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===v))); state.mapView = v; };
+    setView(narrow ? 'list' : (state.mapView || 'map'));
+    $$('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+    if (narrow) { mapWrap.hidden = true; cards.hidden = false; }
+    matchMedia('(max-width:720px)').onchange = ev => { if ($('#map-wrap')) setView(ev.matches ? 'list' : 'map'); };
+  }
+  $$('[data-stamp]').forEach(b => b.addEventListener('click', () => {
+    const id = b.dataset.stamp; state.stamps.has(id) ? state.stamps.delete(id) : state.stamps.add(id);
+    $$('[data-stamp]').forEach(x => x.setAttribute('aria-pressed', String(state.stamps.has(x.dataset.stamp))));
+    const n = state.stamps.size; $('#pass-msg').textContent = n===7 ? 'All 7 stamped. In the real passport, this is a story you took part in. Purchases never earn stamps.' : `${n} of 7 stamped. Purchases never earn stamps.`;
+  }));
+  $$('[data-stamp]').forEach(x => x.setAttribute('aria-pressed', String(state.stamps.has(x.dataset.stamp))));
+  if (state.stamps.size) $('#pass-msg') && ($('#pass-msg').textContent = `${state.stamps.size} of 7 stamped. Purchases never earn stamps.`);
+  $$('[data-cta]').forEach(a => a.addEventListener('click', () => track('cta_click', { where:a.dataset.cta })));
+  bindLaunchList(); renderTix();
+  if (rk==='authors' || rk==='authors-apply') bindAuthors();
+  if (rk==='sponsors' || rk==='sponsors-inquire') bindSponsors();
+  $$('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+    const el = document.getElementById(b.dataset.copy), txt = el.innerText; const old = b.textContent;
+    try { await navigator.clipboard.writeText(txt); b.textContent = 'Copied'; }
+    catch { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Press Ctrl/Cmd+C to copy'; }
+    setTimeout(() => b.textContent = old, 2000);
+  }));
+  $$('[data-tab]').forEach(t => {
+    const sel = () => { $$('[data-tab]').forEach(x => { const on = x===t; x.setAttribute('aria-selected',String(on)); x.tabIndex = on?0:-1; document.getElementById('panel-'+x.dataset.tab).hidden = !on; }); };
+    t.addEventListener('click', sel);
+    t.addEventListener('keydown', e => { const tabs=$$('[data-tab]'), i=tabs.indexOf(t); if (e.key==='ArrowRight'||e.key==='ArrowLeft') { const n=tabs[(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length]; n.focus(); n.click(); } });
+  });
+  const log = $('#evlog'); if (log) log.textContent = state.eventLog.length ? state.eventLog.map(e => `${e.t}  ${e.name}  ${JSON.stringify(e.props)}`).join('\n') : 'No events yet.';
+  // footer
+  renderFooter();
+}
+function renderFooter() {
+  const l = CONFIG.links, lk = (u, t) => u ? `<a href="${esc(u)}">${t}</a>` : `<span>${t} <span class="tag todo">link needed</span></span>`;
+  $('#footer').innerHTML = `<div class="wrap" style="display:grid;gap:22px"><div class="cols">
+    <div><strong style="color:var(--ink)">${esc(CONFIG.name)}</strong><p>${esc(CONFIG.tagline)}</p><p>${esc(CONFIG.nameNote)}</p></div>
+    <div><strong style="color:var(--ink)">Explore</strong><ul><li><a href="#worlds">The seven worlds</a></li><li><a href="#visit">Plan your visit</a></li><li><a href="#authors">For authors</a></li><li><a href="#sponsors">For sponsors</a></li></ul></div>
+    <div><strong style="color:var(--ink)">Policies</strong><ul><li>${lk(l.privacy,'Privacy')}</li><li>${lk(l.terms,'Terms')}</li><li>${lk(l.refunds,'Refunds')}</li><li>${lk(l.accessibility,'Accessibility')}</li></ul></div>
+    <div><strong style="color:var(--ink)">Organizer notes</strong><ul><li><a href="#launch-kit">Launch kit</a></li><li><a href="#emails">Draft emails</a></li></ul><p style="margin-top:8px">Contact: ${esc(CONFIG.contact.email)}</p></div></div>
+    <div class="row" style="justify-content:space-between"><p class="small">A preview of a proposed event. Not a launched festival. Not affiliated with any theme park or technology brand.</p><button class="theme-btn" id="theme-btn" type="button">Toggle light / dark</button></div></div>`;
+  $('#theme-btn').onclick = () => { const r = document.documentElement; const dark = r.dataset.theme==='dark' || (!r.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches); r.dataset.theme = dark ? 'light' : 'dark'; };
+}
+
+/* ---------- global wiring ---------- */
+addEventListener('hashchange', route);
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  if (a.hasAttribute('data-skip')) { e.preventDefault(); $('#main').focus(); return; }
+  if (a.getAttribute('href') === (location.hash || '#home')) { e.preventDefault(); route(); }
+});
+$('#menu-btn').addEventListener('click', () => { const n=$('#nav'); const o=n.classList.toggle('open'); $('#menu-btn').setAttribute('aria-expanded',String(o)); });
+$$('[data-status]').forEach(b => b.addEventListener('click', () => { CONFIG.status = b.dataset.status; state.tix = {tier:null,qty:1,step:1}; track('status_changed_preview',{status:CONFIG.status}); route(); }));
+addEventListener('keydown', e => { if (e.key==='Escape' && $('#nav').classList.contains('open')) { $('#nav').classList.remove('open'); $('#menu-btn').setAttribute('aria-expanded','false'); $('#menu-btn').focus(); } });
+route();
+</script>
