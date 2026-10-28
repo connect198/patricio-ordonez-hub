@@ -267,6 +267,11 @@ tr:last-child td{border-bottom:0}
 .split h3{font-size:1.25rem;margin-bottom:8px}
 @media(max-width:760px){.split{grid-template-columns:1fr}}
 
+/* organizer portrait */
+.portrait{grid-column:1/-1;margin:0 0 clamp(8px,2vw,24px);display:grid;gap:10px}
+.portrait img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;object-position:50% 30%;border-radius:24px;box-shadow:var(--shadow)}
+@media(min-width:861px){.portrait{max-height:none}.portrait img{aspect-ratio:21/9}}
+.portrait figcaption{font-size:.92rem;color:var(--ink2)}
 /* faq */
 details{border-top:1px solid var(--line);padding:2px 0}
 details:last-of-type{border-bottom:1px solid var(--line)}
@@ -800,6 +805,7 @@ function renderHome() {
 }
 function purposeSection() {
   return `<section class="s" id="purpose" aria-labelledby="pp-h"><div class="wrap two">
+    <figure class="portrait"><img src="img/organizers.jpg" width="1400" height="933" alt="Patricio and Daniella standing side by side with arms crossed, smiling, in a bright hotel lounge" loading="lazy"><figcaption>Patricio and Daniella, organizers</figcaption></figure>
     <div class="sh" style="margin:0"><span class="eyebrow">Purpose and organizers</span><h2 id="pp-h">Stories strengthen faith, connect generations, develop gifts, and inspire service.</h2></div>
     <div style="display:grid;gap:16px">
       <p>The festival is a public, reader-and-family experience, rooted in the belief that a well-told story can help a person see God, a family, and a neighbor more clearly.</p>
