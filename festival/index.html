@@ -763,7 +763,7 @@ function hills() {
 }
 function worldCards() {
   return WORLDS.map(w => `<button class="wcard" style="--w:var(${w.col})" data-world="${w.id}" aria-haspopup="dialog">
-    <span class="pic" aria-hidden="true"></span><span class="ic">${ico(w.id)}</span><span class="pillar">${esc(w.pillar)}</span><h3>${esc(w.name)}</h3>
+    <span class="ic">${ico(w.id)}</span><span class="pillar">${esc(w.pillar)}</span><h3>${esc(w.name)}</h3>
     <p class="muted small">${esc(w.celebrates)}</p><span class="more">See what’s inside</span></button>`).join('');
 }
 function worldMap() {
