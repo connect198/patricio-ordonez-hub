@@ -45,6 +45,7 @@ a{color:inherit}
 .lede{font-size:1.2rem;color:var(--ink2);max-width:58ch}
 .muted{color:var(--ink2)}
 .small{font-size:.9rem}
+main:focus,main:focus-visible{outline:none}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
 .skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:100}
 .skip:focus{left:16px}
@@ -315,6 +316,46 @@ ul.ck{list-style:none;margin:0;padding:0;display:grid;gap:2px}
 .ftr li a{display:inline-flex;min-height:36px;align-items:center}
 .theme-btn{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:999px;min-height:44px;padding:0 16px;font:600 .9rem var(--f-body);cursor:pointer}
 
+
+/* illustrations + motion */
+.wcard .pic{margin:-22px -22px 4px;aspect-ratio:4/3;overflow:hidden;border-radius:15px 15px 0 0;background:var(--bg2)}
+.wcard .pic img,.gl-pic img,.car-img img,.dlg-pic{display:block;width:100%;height:100%;object-fit:cover}
+.wcard .pic img{transition:transform .8s ease}
+.wcard:hover .pic img{transform:scale(1.06)}
+.gl-pic{aspect-ratio:4/3;overflow:hidden;border-radius:16px;margin-bottom:6px;background:var(--bg2)}
+.glimpse article{padding-top:0;border-top:0}
+.glimpse article h3{border-top:2px solid var(--gold);padding-top:14px}
+.car{grid-template-columns:minmax(0,340px) 1fr;gap:clamp(18px,4vw,40px);align-items:center}
+.car-img{aspect-ratio:4/3;overflow:hidden;border-radius:18px;border:4px solid var(--surface);box-shadow:0 0 0 2px var(--gold);background:var(--bg2)}
+.car-img img{animation:kb 14s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.car-txt{display:grid;gap:12px;min-width:0}
+.car-txt .chip{display:inline-flex;width:fit-content;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;font:600 .8rem var(--f-body);background:color-mix(in srgb,var(--w) 16%,var(--surface));border:1px solid color-mix(in srgb,var(--w) 55%,transparent)}
+.car-txt q{transition:opacity .4s}
+.car-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.car-ctl button{min-width:44px;min-height:44px;padding:0 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:600 .92rem var(--f-body);cursor:pointer}
+.car-dots{display:flex;gap:6px;margin-left:6px}
+.car-dots i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.car-dots i.on{background:var(--gold-deep)}
+@media(max-width:700px){.car{grid-template-columns:1fr}}
+.dlg-pic{aspect-ratio:4/3;max-width:300px;border-radius:14px;border:3px solid var(--surface);box-shadow:0 0 0 2px var(--w)}
+.ribbon{margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));overflow:hidden;background:var(--ink);color:var(--bg);padding-block:14px;white-space:nowrap;border-block:2px solid var(--gold)}
+.ribbon .trk{display:inline-flex;gap:44px;padding-right:44px;animation:marq 48s linear infinite;will-change:transform}
+.ribbon:hover .trk{animation-play-state:paused}
+.ribbon span{display:inline-flex;gap:12px;align-items:center;font:500 1.05rem var(--f-display);font-variation-settings:"SOFT" 100}
+.ribbon i{width:10px;height:10px;border-radius:50%;background:var(--w)}
+@keyframes marq{to{transform:translateX(-50%)}}
+.ribbon .in2{display:inline-flex}
+:root:not([data-theme="dark"]) .ribbon{--rb:1}
+.rv{opacity:.55;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.stick{position:fixed;left:0;right:0;bottom:0;z-index:25;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .35s ease}
+.stick.show{transform:none}
+.stick .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.stick p{font-weight:600;font-size:.95rem;min-width:0}
+.stick .x{background:none;border:0;color:var(--ink2);min-width:44px;min-height:44px;font-size:1.3rem;cursor:pointer}
+@media(max-width:560px){.stick p{display:none}.stick .wrap{justify-content:center}}
+@media (prefers-reduced-motion: reduce){.rv{opacity:1;transform:none}.ribbon .trk,.car-img img{animation:none}.ribbon{overflow-x:auto}}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
@@ -348,6 +389,7 @@ ul.ck{list-style:none;margin:0;padding:0;display:grid;gap:2px}
 </header>
 <main id="main" tabindex="-1"></main>
 <footer class="ftr" id="footer"></footer>
+<div class="stick" id="stick" aria-label="Quick action"><div class="wrap"><p id="stick-t">Kingdom Story Festival</p><a class="btn btn-gold btn-sm" href="#join" id="stick-cta">Join the Launch List</a><button class="x" type="button" id="stick-x" aria-label="Dismiss this bar">×</button></div></div>
 <dialog id="dlg" aria-labelledby="dlg-title"></dialog>
 <div id="live" class="skip" style="position:absolute;left:-9999px" role="status" aria-live="polite"></div>
 
@@ -699,7 +741,7 @@ function hills() {
 }
 function worldCards() {
   return WORLDS.map(w => `<button class="wcard" style="--w:var(${w.col})" data-world="${w.id}" aria-haspopup="dialog">
-    <span class="ic">${ico(w.id)}</span><span class="pillar">${esc(w.pillar)}</span><h3>${esc(w.name)}</h3>
+    <span class="pic"><img src="img/world-${w.id}.jpg" width="398" height="298" alt="Storybook illustration of ${esc(w.name)}" loading="lazy"></span><span class="ic">${ico(w.id)}</span><span class="pillar">${esc(w.pillar)}</span><h3>${esc(w.name)}</h3>
     <p class="muted small">${esc(w.celebrates)}</p><span class="more">See what’s inside</span></button>`).join('');
 }
 function worldMap() {
@@ -734,17 +776,21 @@ function renderHome() {
     </div>
     ${hills()}
   </section>
+  <div class="ribbon" aria-hidden="true"><div class="trk">${[0,1].map(()=>WORLDS.map(w=>`<span style="--w:var(${w.col})"><i></i>${esc(w.pillar)} · ${esc(w.name)}</span>`).join('')).join('')}</div></div>
 
   <section class="s" aria-labelledby="gl-h"><div class="wrap">
     <div class="sh"><span class="eyebrow">A glimpse of the experience</span><h2 id="gl-h">A festival you walk into, not just walk past.</h2></div>
     <div class="glimpse">
-      <article><h3>Meet the authors.</h3><p class="muted">Talk with the people behind the books, face to face, at the Author Village.</p></article>
-      <article><h3>Step inside the stories.</h3><p class="muted">Live scenes, original characters, and music bring pages to their feet.</p></article>
-      <article><h3>Create something together.</h3><p class="muted">Families make their own pages, characters, and tiny books.</p></article>
-      <article><h3>Take the adventure home.</h3><p class="muted">Leave with books you chose, things you made, and a story to keep telling.</p></article>
+      <article><div class="gl-pic"><img src="img/world-media.jpg" width="398" height="298" alt="Illustration: a studio with a vintage microphone and two interview chairs" loading="lazy"></div><h3>Meet the authors.</h3><p class="muted">Talk with the people behind the books, face to face, at the Author Village.</p></article>
+      <article><div class="gl-pic"><img src="img/world-arts.jpg" width="398" height="298" alt="Illustration: a storybook theater with red curtains" loading="lazy"></div><h3>Step inside the stories.</h3><p class="muted">Live scenes, original characters, and music bring pages to their feet.</p></article>
+      <article><div class="gl-pic"><img src="img/world-family.jpg" width="398" height="298" alt="Illustration: a cottage and story tree hung with paper pages" loading="lazy"></div><h3>Create something together.</h3><p class="muted">Families make their own pages, characters, and tiny books.</p></article>
+      <article><div class="gl-pic"><img src="img/world-edu.jpg" width="398" height="298" alt="Illustration: a courtyard with a telescope, globe, and open books" loading="lazy"></div><h3>Take the adventure home.</h3><p class="muted">Leave with books you chose, things you made, and a story to keep telling.</p></article>
     </div>
-    <div class="scene"><span class="tag">Illustrative scene — imagined, not a report from a past event</span>
-      <q>A child hears a character speak, turns toward the stage, and recognizes the hero from the book in their hands.</q></div>
+    <div class="scene car" id="car" role="group" aria-roledescription="carousel" aria-label="Imagined moments from the seven worlds">
+      <div class="car-img"><img id="car-img" src="img/world-family.jpg" width="398" height="298" alt=""></div>
+      <div class="car-txt"><span class="tag">Illustrative scene — imagined, not a report from a past event</span><span class="chip" id="car-chip"></span>
+        <q id="car-q" aria-live="off"></q>
+        <div class="car-ctl"><button type="button" id="car-prev" aria-label="Previous scene">‹</button><button type="button" id="car-pp" aria-pressed="false">Pause</button><button type="button" id="car-next" aria-label="Next scene">›</button><span class="car-dots" id="car-dots" aria-hidden="true"></span></div></div></div>
   </div></section>
 
   <section class="s alt" id="worlds-sec" aria-labelledby="wd-h"><div class="wrap">
@@ -1069,7 +1115,7 @@ function openWorld(id, opener) {
   track('world_opened', { world:id });
   dlg.style.setProperty('--w', `var(${w.col})`);
   dlg.innerHTML = `<button class="dlg-x" type="button" aria-label="Close" data-close>×</button>
-    <div class="dlg-top"><span class="dlg-ic">${ico(w.id)}</span><span class="eyebrow">${esc(w.pillar)}</span><h2 id="dlg-title" style="font-size:clamp(1.7rem,4vw,2.3rem)">${esc(w.name)}</h2><span class="tag todo">Proposed</span></div>
+    <div class="dlg-top"><span class="dlg-ic">${ico(w.id)}</span><span class="eyebrow">${esc(w.pillar)}</span><h2 id="dlg-title" style="font-size:clamp(1.7rem,4vw,2.3rem)">${esc(w.name)}</h2><span class="tag todo">Proposed</span><img class="dlg-pic" src="img/world-${w.id}.jpg" width="398" height="298" alt="Storybook illustration of ${esc(w.name)}"></div>
     <div class="dlg-body">
       <div><h4>What this world celebrates</h4><p>${esc(w.celebrates)}</p></div>
       <div><h4>Books you might discover</h4><ul>${w.books.map(b=>`<li>${b}</li>`).join('')}</ul></div>
@@ -1146,6 +1192,7 @@ function bindPage(rk) {
   $$('[data-stamp]').forEach(x => x.setAttribute('aria-pressed', String(state.stamps.has(x.dataset.stamp))));
   if (state.stamps.size) $('#pass-msg') && ($('#pass-msg').textContent = `${state.stamps.size} of 7 stamped. Purchases never earn stamps.`);
   $$('[data-cta]').forEach(a => a.addEventListener('click', () => track('cta_click', { where:a.dataset.cta })));
+  clearInterval(carTimer); startCarousel(); startReveal(); startSticky(rk);
   bindLaunchList(); renderTix();
   if (rk==='authors' || rk==='authors-apply') bindAuthors();
   if (rk==='sponsors' || rk==='sponsors-inquire') bindSponsors();
@@ -1174,6 +1221,49 @@ function renderFooter() {
     <div class="row" style="justify-content:space-between"><p class="small">A preview of a proposed event. Not a launched festival. Not affiliated with any theme park or technology brand.</p><button class="theme-btn" id="theme-btn" type="button">Toggle light / dark</button></div></div>`;
   $('#theme-btn').onclick = () => { const r = document.documentElement; const dark = r.dataset.theme==='dark' || (!r.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches); r.dataset.theme = dark ? 'light' : 'dark'; };
 }
+
+
+/* ---------- motion + life ---------- */
+let carTimer = null, io = null, stickIO = null;
+function startCarousel() {
+  const root = $('#car'); if (!root) return;
+  const order = ['family', ...WORLDS.map(w => w.id).filter(i => i !== 'family')];
+  let i = 0, paused = reduceMotion();
+  const dots = $('#car-dots'); dots.innerHTML = order.map(() => '<i></i>').join('');
+  const show = n => {
+    i = (n + order.length) % order.length; const w = worldById(order[i]);
+    $('#car-img').src = `img/world-${w.id}.jpg`; $('#car-q').textContent = w.scene;
+    const c = $('#car-chip'); c.style.setProperty('--w', `var(${w.col})`); c.textContent = `${w.pillar} · ${w.name}`;
+    $$('i', dots).forEach((d, k) => d.classList.toggle('on', k === i));
+  };
+  const tick = () => { clearInterval(carTimer); if (!paused) carTimer = setInterval(() => show(i + 1), 7000); };
+  const setPaused = p => { paused = p; $('#car-pp').textContent = p ? 'Play' : 'Pause'; $('#car-pp').setAttribute('aria-pressed', String(p)); $('#car-q').setAttribute('aria-live', p ? 'polite' : 'off'); tick(); };
+  $('#car-prev').onclick = () => { show(i - 1); setPaused(true); };
+  $('#car-next').onclick = () => { show(i + 1); setPaused(true); };
+  $('#car-pp').onclick = () => setPaused(!paused);
+  show(0); setPaused(paused);
+}
+function startReveal() {
+  if (io) io.disconnect();
+  if (reduceMotion() || !('IntersectionObserver' in window)) return;
+  io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  $$('.glimpse article,.wcard,.sig article,.adv a,.sched li,.pk article,.pk5 article,.scene,.split>div,.panel').forEach(el => { el.classList.add('rv'); io.observe(el); });
+  setTimeout(() => $$('.rv:not(.in)').forEach(el => { const r = el.getBoundingClientRect(); if (r.top < innerHeight) el.classList.add('in'); }), 60);
+}
+let stickOff = false;
+function startSticky(rk) {
+  const bar = $('#stick'); if (stickIO) stickIO.disconnect();
+  bar.classList.remove('show');
+  $('#stick-cta').textContent = ctaLabel();
+  $('#stick-t').textContent = dateLine();
+  if (!['home','worlds','visit','join'].includes(rk) || !('IntersectionObserver' in window)) return;
+  const hero = $('.hero') || $('main section'), tix = $('#tickets');
+  const st = { hero: true, tix: false };
+  const upd = () => bar.classList.toggle('show', !stickOff && !st.hero && !st.tix);
+  stickIO = new IntersectionObserver(es => es.forEach(e => { if (e.target === hero) st.hero = e.isIntersecting; else st.tix = e.isIntersecting; upd(); }), { threshold: 0 });
+  stickIO.observe(hero); tix && stickIO.observe(tix);
+}
+$('#stick-x').addEventListener('click', () => { stickOff = true; $('#stick').classList.remove('show'); });
 
 /* ---------- global wiring ---------- */
 addEventListener('hashchange', route);
