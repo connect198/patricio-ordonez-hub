@@ -1,4 +1,4 @@
-<title>Kingdom Story Festival</title>
+<title>Kingdom Story</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -374,9 +374,9 @@ ul.ck{list-style:none;margin:0;padding:0;display:grid;gap:2px}
 </div>
 <header class="hdr">
   <div class="wrap">
-    <a class="brand" href="#home" aria-label="Kingdom Story Festival home">
+    <a class="brand" href="#home" aria-label="Kingdom Story home">
       <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 9c4-2 9-2 13 1 4-3 9-3 13-1v16c-4-2-9-2-13 1-4-3-9-3-13-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 10v16" stroke="var(--gold)" stroke-width="2"/><path d="M16 3l1.6 3.2L21 6.7l-2.5 2.4.6 3.4L16 10.9 12.9 12.5l.6-3.4L11 6.7l3.4-.5z" fill="var(--gold)"/></svg>
-      Kingdom Story Festival</a>
+      Kingdom Story</a>
     <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="#worlds" data-nav="worlds">Explore the Worlds</a>
@@ -389,7 +389,7 @@ ul.ck{list-style:none;margin:0;padding:0;display:grid;gap:2px}
 </header>
 <main id="main" tabindex="-1"></main>
 <footer class="ftr" id="footer"></footer>
-<div class="stick" id="stick" aria-label="Quick action"><div class="wrap"><p id="stick-t">Kingdom Story Festival</p><a class="btn btn-gold btn-sm" href="#join" id="stick-cta">Join the Launch List</a><button class="x" type="button" id="stick-x" aria-label="Dismiss this bar">×</button></div></div>
+<div class="stick" id="stick" aria-label="Quick action"><div class="wrap"><p id="stick-t">Kingdom Story</p><a class="btn btn-gold btn-sm" href="#join" id="stick-cta">Join the Launch List</a><button class="x" type="button" id="stick-x" aria-label="Dismiss this bar">×</button></div></div>
 <dialog id="dlg" aria-labelledby="dlg-title"></dialog>
 <div id="live" class="skip" style="position:absolute;left:-9999px" role="status" aria-live="polite"></div>
 
@@ -399,7 +399,7 @@ ul.ck{list-style:none;margin:0;padding:0;display:grid;gap:2px}
    CONFIG — every editable event fact lives here. Null / [BRACKETS] = not confirmed.
    ============================================================ */
 const CONFIG = {
-  name: 'Kingdom Story Festival',
+  name: 'Kingdom Story',
   tagline: 'Seven Worlds. Countless Stories. One King.',
   promise: 'Where Books Come to Life.',
   nameNote: 'Working brand name. Availability of the name or trademark has not been verified.',
@@ -575,7 +575,7 @@ function launchListSection() {
       <p class="lede">Dates, venue, and tickets are not announced yet. Tell us you’re interested and we’ll write when there is something real to share: the date, the place, how admission works.</p>
       <ul class="ck">
         <li>${check_ic()} No payment now. No account.</li>
-        <li>${check_ic()} Updates about this festival only, unless you tick the separate optional box.</li>
+        <li>${check_ic()} Updates about this event only, unless you tick the separate optional box.</li>
         <li>${check_ic()} Unsubscribe any time [mechanism to be connected].</li>
       </ul>
       <p class="small muted">${esc(dateLine())}</p>
@@ -588,8 +588,8 @@ function launchListSection() {
         <fieldset><legend>Which worlds sound most like you? <span class="muted small">(optional)</span></legend>
           <div class="checks cols">${WORLDS.map(w => check('ll-w-'+w.id, esc(w.pillar === 'Arts & Entertainment' ? 'Arts & Entertainment' : w.pillar))).join('')}</div></fieldset>
         <div class="checks">
-          ${check('ll-agree','I’d like emails about Kingdom Story Festival. <span class="req" aria-hidden="true">*</span>')}
-          ${check('ll-mkt','Also send me news from the organizers’ other work (Tell Your Story Coaching, Message Media, Kingdom Book Awards). <span class="muted">Optional. Separate from the festival.</span>')}
+          ${check('ll-agree','I’d like emails about Kingdom Story. <span class="req" aria-hidden="true">*</span>')}
+          ${check('ll-mkt','Also send me news from the organizers’ other work (Tell Your Story Coaching, Message Media, Kingdom Book Awards). <span class="muted">Optional. Separate from Kingdom Story.</span>')}
         </div>
         <div class="err" id="ll-agree-e" hidden></div>
         ${formStatus('ll-form')}
@@ -604,7 +604,7 @@ function bindLaunchList() {
   const form = $('#ll-form'); if (!form) return;
   bindForm('ll-form', { 'll-first':{req:true}, 'll-email':{req:true,email:true}, 'll-who':{req:true} }, (d) => {
     if (!$('#ll-agree').checked) {
-      const er = $('#ll-agree-e'); er.textContent = 'Tick this box so we know you want festival updates.'; er.hidden = false;
+      const er = $('#ll-agree-e'); er.textContent = 'Tick this box so we know you want Kingdom Story updates.'; er.hidden = false;
       const st = $('#ll-form-st'); st.className='status bad'; st.hidden=false; st.textContent='Please fix 1 field before submitting.'; $('#ll-agree').focus(); return;
     }
     state.submitted.reader = { kind:'launch-list', first:d['ll-first'] };
@@ -710,13 +710,13 @@ function sampleDay() {
 function faq() {
   const tbd = '<span class="tag todo">Organizer review needed</span>';
   const items = [
-   ['Is the festival suitable for children?','We’re designing it for families and readers of all ages, with age-appropriate activities in every world. Specific activities will show suggested ages. Final guidance: '+ tbd],
+   ['Is Kingdom Story suitable for children?','We’re designing it for families and readers of all ages, with age-appropriate activities in every world. Specific activities will show suggested ages. Final guidance: '+ tbd],
    ['Is it accessible?','Accessibility is part of the planning, and basic accommodations will never carry an extra charge. Venue-specific details (step-free routes, seating, quiet spaces, sensory information) will be published once the venue is confirmed. ' + tbd],
    ['Do children stay with a responsible adult?','Yes, that is the plan. Children are expected to stay with a parent or responsible adult throughout. Any drop-off activity would be a separate, clearly described option with its own policy. ' + tbd],
    ['What does admission include?','Proposed: entry to all seven worlds, a Story Passport, the Story Parade, and general stage seating as space allows. The exact list is set when admission is approved and is shown before you pay.'],
    ['Do books cost extra?','Books are sold by the authors and sellers, and buying is never required to take part or to earn passport stamps.'],
    ['What about food and breaks?','Plan for a lunch break and quiet time in the day. Food options, outside-food rules, and allergen information depend on the venue. ' + tbd],
-   ['Can I be an author at the festival?','Possibly. Authors can apply for a table, a story encounter, or a media package. Applications are reviewed by the organizers. Paying for a table does not guarantee stage selection, media reach, sales, or award recognition. See <a class="tlink" href="#authors">For Authors</a>.'],
+   ['Can I be an author at Kingdom Story?','Possibly. Authors can apply for a table, a story encounter, or a media package. Applications are reviewed by the organizers. Paying for a table does not guarantee stage selection, media reach, sales, or award recognition. See <a class="tlink" href="#authors">For Authors</a>.'],
    ['Can I take photos?','Photography preferences (where photos are welcome, where they are not, and how children’s images are treated) are not finalized. ' + tbd],
    ['What about ticket changes and refunds?','Policies are not yet approved, so nothing is promised here. They will be published, and linked from checkout, before any ticket is sold. ' + tbd]
   ];
@@ -733,7 +733,7 @@ function heroArt() {
   const flags = cols.map((c,i) => { const [x,y] = pt(0.08 + i*0.14); return `<g class="flag" style="transform-origin:${x}px ${y}px"><path d="M${x-12} ${y-2} h24 l-12 28z" fill="var(${c})"/></g>`; }).join('');
   return `<figure class="hero-photo">
     <svg class="lights" viewBox="0 0 600 100" aria-hidden="true"><path d="M10 78 Q300 -14 590 78" fill="none" stroke="var(--gold-deep)" stroke-width="1.5" opacity=".7"/>${flags}</svg>
-    <img src="img/organizers.jpg" width="1400" height="933" alt="Patricio and Daniella, the festival organizers, smiling side by side in a bright hotel lounge" fetchpriority="high">
+    <img src="img/organizers.jpg" width="1400" height="933" alt="Patricio and Daniella, the organizers, smiling side by side in a bright hotel lounge" fetchpriority="high">
     <figcaption><span class="tag" style="background:var(--surface)">Your hosts</span> Patricio and Daniella</figcaption></figure>`;
 }
 function hills() {
@@ -759,7 +759,7 @@ function renderHome() {
   <section class="hero" aria-labelledby="h1">
     <div class="wrap">
       <div class="hero-copy">
-        <span class="eyebrow">Kingdom Story Festival</span>
+        <span class="eyebrow">Kingdom Story</span>
         <h1 id="h1">What if your favorite book walked off the page?</h1>
         <p class="promise">Where Books Come to Life.</p>
         <p class="lede" style="color:var(--ink)">Step into seven story worlds filled with faith, imagination, courage, and purpose. Meet the authors, discover the books, and begin a story of your own.</p>
@@ -768,7 +768,7 @@ function renderHome() {
           <a class="btn btn-line" href="#worlds">Explore the Seven Worlds</a>
         </div>
         <div style="display:grid;gap:10px">
-          <a class="tlink" href="#authors">Bring Your Book to the Festival</a>
+          <a class="tlink" href="#authors">Bring Your Book to Kingdom Story</a>
           <span class="tba"><i></i>${esc(dateLine())}</span>
         </div>
       </div>
@@ -779,7 +779,7 @@ function renderHome() {
   <div class="ribbon" aria-hidden="true"><div class="trk">${[0,1].map(()=>WORLDS.map(w=>`<span style="--w:var(${w.col})"><i></i>${esc(w.pillar)} · ${esc(w.name)}</span>`).join('')).join('')}</div></div>
 
   <section class="s" aria-labelledby="gl-h"><div class="wrap">
-    <div class="sh"><span class="eyebrow">A glimpse of the experience</span><h2 id="gl-h">A festival you walk into, not just walk past.</h2></div>
+    <div class="sh"><span class="eyebrow">A glimpse of the experience</span><h2 id="gl-h">A story you walk into, not just walk past.</h2></div>
     <div class="glimpse">
       <article><div class="gl-pic"><img src="img/world-media.jpg" width="398" height="298" alt="Illustration: a studio with a vintage microphone and two interview chairs" loading="lazy"></div><h3>Meet the authors.</h3><p class="muted">Talk with the people behind the books, face to face, at the Author Village.</p></article>
       <article><div class="gl-pic"><img src="img/world-arts.jpg" width="398" height="298" alt="Illustration: a storybook theater with red curtains" loading="lazy"></div><h3>Step inside the stories.</h3><p class="muted">Live scenes, original characters, and music bring pages to their feet.</p></article>
@@ -816,7 +816,7 @@ function renderHome() {
       <article><span class="num-ic"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS.family}</svg></span><h3>The Author Village</h3><p class="muted">Author tables grouped by world, so readers find books by the stories they love.</p></article>
     </div>
     <div class="pass" id="pass" aria-labelledby="pass-h">
-      <div><h3 id="pass-h" style="font-size:1.3rem">Try the passport</h3><p class="muted small">Tap a world to stamp it. This is an interactive sketch. At the festival, a stamp means you took part in something there.</p></div>
+      <div><h3 id="pass-h" style="font-size:1.3rem">Try the passport</h3><p class="muted small">Tap a world to stamp it. This is an interactive sketch. At Kingdom Story, a stamp means you took part in something there.</p></div>
       <div class="stamps">${WORLDS.map(w => `<button class="stamp" style="--w:var(${w.col})" data-stamp="${w.id}" aria-pressed="false"><span class="ring">${ico(w.id)}</span>${esc(w.pillar === 'Arts & Entertainment' ? 'Arts' : w.pillar)}</button>`).join('')}</div>
       <p id="pass-msg" class="small muted" role="status">0 of 7 stamped. Purchases never earn stamps.</p></div>
   </div></section>
@@ -850,18 +850,18 @@ function purposeSection() {
   return `<section class="s" id="purpose" aria-labelledby="pp-h"><div class="wrap two">
     <div class="sh" style="margin:0"><span class="eyebrow">Purpose and organizers</span><h2 id="pp-h">Stories strengthen faith, connect generations, develop gifts, and inspire service.</h2></div>
     <div style="display:grid;gap:16px">
-      <p>The festival is a public, reader-and-family experience, rooted in the belief that a well-told story can help a person see God, a family, and a neighbor more clearly.</p>
+      <p>Kingdom Story is a public, reader-and-family experience, rooted in the belief that a well-told story can help a person see God, a family, and a neighbor more clearly.</p>
       <p>It is organized by the team behind <strong>Tell Your Story Coaching</strong> (books, coaching, and business education), <strong>Message Media / Mobilize Your Message Media</strong> (marketing and media), and <strong>Kingdom Book Awards</strong> (literary recognition).</p>
-      <p>Our conferences equip authors and entrepreneurs, and our awards recognize eligible work through their own criteria. This festival is separate from both, and from our existing April and November events. It is valuable without anyone buying coaching. Programs we are still developing, such as The New Kingdom Entrepreneur and Kingdom AI education, are not presented as operating here.</p>
+      <p>Our conferences equip authors and entrepreneurs, and our awards recognize eligible work through their own criteria. Kingdom Story is separate from both, and from our existing April and November events. It is valuable without anyone buying coaching. Programs we are still developing, such as The New Kingdom Entrepreneur and Kingdom AI education, are not presented as operating here.</p>
       <p class="small"><span class="tag todo">Needs organizer input</span> Organizer biographies, credentials, and past results will be added by the team. None are invented here.</p>
     </div></div></section>`;
 }
 function finalCta() {
   const lbl = CONFIG.status==='launch-list' ? 'Join the Launch List' : 'Get Tickets';
-  return `<section class="final" aria-labelledby="fn-h"><span class="eyebrow">Final invitation</span><h2 id="fn-h">The festival ends. Your story continues.</h2>
+  return `<section class="final" aria-labelledby="fn-h"><span class="eyebrow">Final invitation</span><h2 id="fn-h">The day ends. Your story continues.</h2>
     <p class="lede">Come ready to be surprised, and leave ready to tell what you saw.</p>
     <a class="btn btn-gold" href="#join" data-cta="final">${lbl}</a>
-    <a class="tlink small" href="#authors">Authors, bring your book to the festival</a></section>`;
+    <a class="tlink small" href="#authors">Authors, bring your book to Kingdom Story</a></section>`;
 }
 
 function renderVisit() {
@@ -896,17 +896,17 @@ function renderAuthors() {
     <div class="sh"><span class="eyebrow">Participation options</span><h2 id="ap-h">Three ways to take part.</h2><p class="lede">Inclusions and pricing are configurable and not yet approved. Nothing is for sale today.</p></div>
     <div class="pk">
       <article><span class="tag todo">Proposed</span><h3>Author Table</h3><p class="muted">A place in the Author Village near your story world.</p>
-        <ul><li>Table in the Author Village [size and furniture TBD]</li><li>Listing in the festival guide [format TBD]</li><li>Your book in a world that fits it</li></ul><p class="small muted">Price: to be announced.</p></article>
+        <ul><li>Table in the Author Village [size and furniture TBD]</li><li>Listing in the program guide [format TBD]</li><li>Your book in a world that fits it</li></ul><p class="small muted">Price: to be announced.</p></article>
       <article><span class="tag todo">Proposed</span><h3>Author Story Encounter</h3><p class="muted">A short, scheduled moment to bring your book to life for a small audience.</p>
         <ul><li>A timed encounter in or near your world [length TBD]</li><li>Simple staging help [TBD]</li><li>Subject to editorial curation and production</li></ul><p class="small muted">Selection is by the organizers. Not available to buy.</p></article>
       <article><span class="tag todo">Proposed</span><h3>Author Media Package</h3><p class="muted">Optional promotional content created with the Story Studio team.</p>
         <ul><li>Interview or short video [format TBD]</li><li>Delivered to you to share</li><li>Clearly labeled as a paid promotion</li></ul><p class="small muted">Price: to be announced.</p></article>
     </div>
     <div class="split" style="margin-top:28px">
-      <div><h3>Paid promotion</h3><p class="muted">Tables and media packages are paid promotional participation. They help cover the costs of the festival and the visibility they give your book is yours to use.</p></div>
+      <div><h3>Paid promotion</h3><p class="muted">Tables and media packages are paid promotional participation. They help cover the costs of Kingdom Story and the visibility they give your book is yours to use.</p></div>
       <div><h3>Curated editorial programming</h3><p class="muted">Stage scenes and story encounters are chosen by the organizers for fit, quality, and the audience, <em>independent of what anyone paid</em>.</p></div>
     </div>
-    <p class="note"><strong>What a table does not promise:</strong> stage selection, media reach, book sales, or award recognition. Kingdom Book Awards judges eligible work by its own criteria, and festival participation neither helps nor hurts an entry.</p>
+    <p class="note"><strong>What a table does not promise:</strong> stage selection, media reach, book sales, or award recognition. Kingdom Book Awards judges eligible work by its own criteria, and Kingdom Story participation neither helps nor hurts an entry.</p>
   </div></section>
 
   <section class="s" aria-labelledby="rv-h"><div class="wrap two">
@@ -949,7 +949,7 @@ function bindAuthors() {
 /* ---------- Sponsors ---------- */
 function renderSponsors() {
   const opps = [
-   ['Festival Partner','The broadest relationship with the festival as a whole.',['Recognition across festival materials [placement TBD]','A hosted presence at an agreed activity','Planning conversation with the organizers']],
+   ['Kingdom Story Partner','The broadest relationship with Kingdom Story as a whole.',['Recognition across event materials [placement TBD]','A hosted presence at an agreed activity','Planning conversation with the organizers']],
    ['Story World Partner','Sponsor one of the seven worlds and help it come alive.',['Named association with one world [terms TBD]','Opportunity to support a specific activity there','Alignment with the world’s theme, reviewed together']],
    ['Family Experience Partner','Support the activities that welcome children and parents.',['Support for family activities and materials','Recognition in the Family Storyhouse [TBD]','Optional volunteer participation']],
    ['Story Passport Partner','Help produce the passport and its stamps.',['Recognition on the passport [format TBD]','Support for printed materials','No influence over how stamps are earned']],
@@ -964,7 +964,7 @@ function renderSponsors() {
     <div class="sh"><span class="eyebrow">Opportunities</span><h2 id="so-h">Five ways to take part.</h2><p class="lede">Everything below is proposed. We don’t quote audience numbers, impressions, or guaranteed outcomes.</p></div>
     <div class="pk5">${opps.map(o=>`<article class="panel" style="box-shadow:none;display:grid;gap:12px;align-content:start"><span class="tag todo">Proposed</span><h3>${o[0]}</h3><p class="muted">${o[1]}</p>
       <div><strong class="small">Potential deliverables</strong><ul style="margin:6px 0 0;padding-left:1.1rem;display:grid;gap:3px">${o[2].map(x=>`<li>${x}</li>`).join('')}</ul></div></article>`).join('')}</div>
-    <p class="note"><strong>Independence:</strong> sponsorship cannot buy award wins or independent editorial endorsement. Kingdom Book Awards decisions and festival curation stay separate from sponsor relationships.</p>
+    <p class="note"><strong>Independence:</strong> sponsorship cannot buy award wins or independent editorial endorsement. Kingdom Book Awards decisions and Kingdom Story curation stay separate from sponsor relationships.</p>
   </div></section>
   <section class="s" id="inquire" aria-labelledby="sf-h"><div class="wrap two">
     <div class="sh" style="margin:0"><span class="eyebrow">Sponsor inquiry</span><h2 id="sf-h">Tell us what you have in mind.</h2><p class="lede">A member of the team will follow up personally. An inquiry isn’t a commitment.</p>
@@ -973,7 +973,7 @@ function renderSponsors() {
       ${field({id:'sp-org',label:'Organization',req:true,ac:'organization'})}
       ${field({id:'sp-name',label:'Contact name',req:true,ac:'name'})}
       ${field({id:'sp-email',label:'Email',type:'email',req:true,ac:'email'})}
-      ${field({id:'sp-int',label:'Interest',req:true,opts:[['','Choose one'],['festival','Festival Partner'],['world','Story World Partner'],['family','Family Experience Partner'],['passport','Story Passport Partner'],['access','Community Access Partner'],['unsure','Not sure yet']]})}
+      ${field({id:'sp-int',label:'Interest',req:true,opts:[['','Choose one'],['festival','Kingdom Story Partner'],['world','Story World Partner'],['family','Family Experience Partner'],['passport','Story Passport Partner'],['access','Community Access Partner'],['unsure','Not sure yet']]})}
       ${field({id:'sp-budget',label:'Budget range',hint:'Optional. A rough range helps us suggest something that fits.',opts:[['','Prefer not to say'],['u2','Under $2,500'],['2-5','$2,500 to $5,000'],['5-15','$5,000 to $15,000'],['15+','$15,000 or more'],['talk','Let’s talk first']]})}
       ${field({id:'sp-msg',label:'Anything we should know',rows:3})}
       ${formStatus('sp-form')}
@@ -996,7 +996,7 @@ function demoRibbon(sub) {
 }
 function shareBlock() {
   return `<div class="panel" style="box-shadow:none"><h3 style="font-size:1.3rem">Optional: tell a friend</h3><p class="muted small" style="margin:6px 0 14px">If you think someone you know would love this, you can share it. Entirely up to you.</p>
-    <div class="row"><button class="btn btn-line btn-sm" type="button" data-copy="share-text">Copy a short message</button><span id="share-text" class="small muted" style="flex:1;min-width:220px">I’m keeping an eye on the Kingdom Story Festival, a book festival where stories come to life for families. Details soon.</span></div></div>`;
+    <div class="row"><button class="btn btn-line btn-sm" type="button" data-copy="share-text">Copy a short message</button><span id="share-text" class="small muted" style="flex:1;min-width:220px">I’m keeping an eye on Kingdom Story, a book experience where stories come to life for families. Details soon.</span></div></div>`;
 }
 function renderConfirmReader() {
   const s = state.submitted.reader, first = s && s.first ? esc(s.first) : '';
@@ -1009,8 +1009,8 @@ function renderConfirmReader() {
       <li><span class="n">1</span><div><strong>A confirmation email</strong><p class="muted small">In production, sent from the server only after your request is stored.</p></div></li>
       <li><span class="n">2</span><div><strong>A preview of the worlds</strong><p class="muted small">A short note about what you can explore.</p></div></li>
       <li><span class="n">3</span><div><strong>Practical details</strong><p class="muted small">Date, place, arrival, and accessibility, once confirmed.</p></div></li>
-      <li><span class="n">4</span><div><strong>A reminder before the festival</strong><p class="muted small">Only if dates are confirmed.</p></div></li></ol></div>
-    <div class="panel" style="box-shadow:none"><h3 style="font-size:1.3rem">Add to your calendar</h3><p class="muted small" style="margin:6px 0 12px">${CONFIG.dates?'Add the festival to your calendar.':'Calendar tools appear here once the date is confirmed. No date is announced yet.'}</p>
+      <li><span class="n">4</span><div><strong>A reminder before Kingdom Story</strong><p class="muted small">Only if dates are confirmed.</p></div></li></ol></div>
+    <div class="panel" style="box-shadow:none"><h3 style="font-size:1.3rem">Add to your calendar</h3><p class="muted small" style="margin:6px 0 12px">${CONFIG.dates?'Add Kingdom Story to your calendar.':'Calendar tools appear here once the date is confirmed. No date is announced yet.'}</p>
       <button class="btn btn-line btn-sm" type="button" ${CONFIG.dates?'':'disabled aria-disabled="true"'}>Add to calendar</button></div>
     ${shareBlock()}
     <div class="row"><a class="btn btn-gold" href="#worlds">Explore the Seven Worlds</a><a class="tlink" href="#visit">Plan your visit</a></div></section>`;
@@ -1026,7 +1026,7 @@ function renderConfirmAuthor() {
       <li><span class="n">3</span><div><strong>A personal decision</strong><p class="muted small">Never automatic. You’ll be told what is offered, if anything, and what it costs, before you commit.</p></div></li>
       <li><span class="n">4</span><div><strong>Onboarding, if invited</strong><p class="muted small">A preparation checklist and setup details.</p></div></li></ol></div>
     <p class="small muted">Questions? ${esc(CONFIG.contact.email)}</p>
-    <div class="row"><a class="btn btn-gold" href="#home">Back to the festival</a><a class="tlink" href="#sponsors">For sponsors</a></div></section>`;
+    <div class="row"><a class="btn btn-gold" href="#home">Back to Kingdom Story</a><a class="tlink" href="#sponsors">For sponsors</a></div></section>`;
 }
 function renderConfirmSponsor() {
   const s = state.submitted.sponsor;
@@ -1037,26 +1037,26 @@ function renderConfirmSponsor() {
       <li><span class="n">1</span><div><strong>Receipt email</strong><p class="muted small">So you know it reached us.</p></div></li>
       <li><span class="n">2</span><div><strong>A personal reply</strong><p class="muted small">From a team member, not an automation. No response time is promised here.</p></div></li>
       <li><span class="n">3</span><div><strong>A conversation</strong><p class="muted small">About what you hope to make possible and what is realistic.</p></div></li></ol></div>
-    <div class="row"><a class="btn btn-gold" href="#home">Back to the festival</a></div></section>`;
+    <div class="row"><a class="btn btn-gold" href="#home">Back to Kingdom Story</a></div></section>`;
 }
 
 /* ---------- Draft emails ---------- */
 const EMAILS = {
  Readers:[
-  ['1. Welcome','You’re on the list for Kingdom Story Festival','Hi [FIRST NAME],\n\nThank you for joining the launch list for Kingdom Story Festival: a book festival where families and readers step into stories.\n\nHere is what to know today:\n• We have not announced a date or venue yet.\n• We will write when we have something real to share.\n• You can leave the list any time: [UNSUBSCRIBE LINK].\n\nUntil then, take a look at the seven worlds: [LINK TO WORLDS].\n\nWith gratitude,\n[SENDER NAME]\n[ORGANIZATION] · [CONTACT EMAIL]'],
+  ['1. Welcome','You’re on the list for Kingdom Story','Hi [FIRST NAME],\n\nThank you for joining the launch list for Kingdom Story: a book experience where families and readers step into stories.\n\nHere is what to know today:\n• We have not announced a date or venue yet.\n• We will write when we have something real to share.\n• You can leave the list any time: [UNSUBSCRIBE LINK].\n\nUntil then, take a look at the seven worlds: [LINK TO WORLDS].\n\nWith gratitude,\n[SENDER NAME]\n[ORGANIZATION] · [CONTACT EMAIL]'],
   ['2. Experience preview','A peek inside the seven worlds','Hi [FIRST NAME],\n\nImagine a child hearing a character speak, turning toward the stage, and recognizing the hero from the book in their hands. That is the kind of moment we are designing for.\n\nOne of the worlds we are planning: [WORLD NAME]. [ONE SENTENCE FROM CONFIRMED PROGRAM ONLY].\n\nEverything is subject to final programming. We will tell you what is confirmed.\n\nSee the worlds: [LINK]\n\n[SENDER NAME]'],
   ['3. Practical preparation','Planning your visit: what to know','Hi [FIRST NAME],\n\nHere are the practical details we have confirmed:\n• Date and time: [CONFIRMED DATE/TIME]\n• Place: [VENUE, ADDRESS]\n• Parking: [DETAILS]\n• Accessibility: [DETAILS]\n• Food: [DETAILS]\n\nChildren stay with a parent or responsible adult.\n\nQuestions? Reply to this email.\n\n[SENDER NAME]'],
-  ['4. Reminder','Kingdom Story Festival is almost here','Hi [FIRST NAME],\n\nA friendly reminder that the festival is on [DATE] at [VENUE].\n\nDoors open at [TIME]. Your Story Passport will be waiting at the entrance.\n\nAdd it to your calendar: [LINK]\nGetting here: [LINK]\n\nSee you soon,\n[SENDER NAME]'],
-  ['5. Thank-you','Thank you for being part of the story','Hi [FIRST NAME],\n\nThank you for coming. We hope you left with a book you’re excited to read, something you made, and a story to keep telling.\n\nIf you would like to share what the day meant to you, reply to this email. We read every message.\n\nThe festival ends. Your story continues.\n\n[SENDER NAME]']],
+  ['4. Reminder','Kingdom Story is almost here','Hi [FIRST NAME],\n\nA friendly reminder that Kingdom Story is on [DATE] at [VENUE].\n\nDoors open at [TIME]. Your Story Passport will be waiting at the entrance.\n\nAdd it to your calendar: [LINK]\nGetting here: [LINK]\n\nSee you soon,\n[SENDER NAME]'],
+  ['5. Thank-you','Thank you for being part of the story','Hi [FIRST NAME],\n\nThank you for coming. We hope you left with a book you’re excited to read, something you made, and a story to keep telling.\n\nIf you would like to share what the day meant to you, reply to this email. We read every message.\n\nThe day ends. Your story continues.\n\n[SENDER NAME]']],
  Authors:[
   ['1. Application receipt','We received your application','Hi [AUTHOR NAME],\n\nThank you for applying with “[BOOK TITLE]”. This email confirms we received your application. It does not mean you have been accepted.\n\nA member of the team will read it and be in touch personally.\n\n[SENDER NAME] · [CONTACT EMAIL]'],
   ['2a. Decision: invitation','An invitation to take part','Hi [AUTHOR NAME],\n\nThank you for applying. We would be glad to invite “[BOOK TITLE]” to take part as: [APPROVED OPTION].\n\nWhat this includes: [APPROVED INCLUSIONS]\nCost, if any: [APPROVED PRICE]\nWhat it does not include: stage selection, media reach, sales, or award recognition are not guaranteed.\n\nTo accept, reply by [DATE] or use this link: [LINK].\n\n[SENDER NAME]'],
   ['2b. Decision: waitlist','Your application is on our waiting list','Hi [AUTHOR NAME],\n\nThank you for applying with “[BOOK TITLE]”. We have more interest than space in [WORLD NAME] right now, so we have placed you on a waiting list.\n\nWe will tell you as soon as anything changes.\n\n[SENDER NAME]'],
-  ['2c. Decision: not this time','About your application','Hi [AUTHOR NAME],\n\nThank you for applying with “[BOOK TITLE]”. We are not able to offer a place at this festival.\n\nThis is not a judgment on your book. [OPTIONAL: other ways to take part.]\n\nWe appreciate you.\n\n[SENDER NAME]'],
+  ['2c. Decision: not this time','About your application','Hi [AUTHOR NAME],\n\nThank you for applying with “[BOOK TITLE]”. We are not able to offer a place at this event.\n\nThis is not a judgment on your book. [OPTIONAL: other ways to take part.]\n\nWe appreciate you.\n\n[SENDER NAME]'],
   ['3. Onboarding','Welcome: next steps for [BOOK TITLE]','Hi [AUTHOR NAME],\n\nWelcome. Here is what happens next:\n1. Confirm your details: [LINK]\n2. Agree to participation terms: [LINK]\n3. Review setup details for your [TABLE/ENCOUNTER]: [DETAILS]\n\nContact: [NAME, EMAIL]\n\n[SENDER NAME]'],
-  ['4. Preparation checklist','Your festival preparation checklist','Hi [AUTHOR NAME],\n\nA short checklist:\n☐ Books and inventory plan\n☐ Payment method for sales\n☐ Signage and display materials\n☐ A one-minute introduction to your book\n☐ Child-safe, family-friendly content check\n☐ Arrival and load-in time: [TIME]\n☐ Accessibility or setup needs confirmed\n\nSee you at the festival,\n[SENDER NAME]']],
+  ['4. Preparation checklist','Your Kingdom Story preparation checklist','Hi [AUTHOR NAME],\n\nA short checklist:\n☐ Books and inventory plan\n☐ Payment method for sales\n☐ Signage and display materials\n☐ A one-minute introduction to your book\n☐ Child-safe, family-friendly content check\n☐ Arrival and load-in time: [TIME]\n☐ Accessibility or setup needs confirmed\n\nSee you at Kingdom Story,\n[SENDER NAME]']],
  Sponsors:[
-  ['1. Inquiry receipt','We received your sponsor inquiry','Hi [CONTACT NAME],\n\nThank you for your interest in partnering with Kingdom Story Festival. This confirms we received your inquiry for [ORGANIZATION].\n\nA member of our team will follow up personally.\n\n[SENDER NAME] · [CONTACT EMAIL]'],
+  ['1. Inquiry receipt','We received your sponsor inquiry','Hi [CONTACT NAME],\n\nThank you for your interest in partnering with Kingdom Story. This confirms we received your inquiry for [ORGANIZATION].\n\nA member of our team will follow up personally.\n\n[SENDER NAME] · [CONTACT EMAIL]'],
   ['2. Human follow-up (template)','Following up on your sponsor inquiry','Hi [CONTACT NAME],\n\nThank you for reaching out about [INTEREST]. I’d love to hear more about what you hope to make possible for readers and families.\n\nCould we find 20 minutes? Here are a few times: [OPTIONS].\n\nA note so expectations are clear: sponsorship does not buy award wins or independent editorial endorsement, and we do not guarantee audience numbers.\n\n[SENDER NAME]']]
 };
 function renderEmails() {
@@ -1139,7 +1139,7 @@ $('#dlg').addEventListener('close', () => { if (lastOpener && document.contains(
    ROUTER
    ============================================================ */
 const ROUTES = {
-  home:{ r:renderHome, title:'Kingdom Story Festival' },
+  home:{ r:renderHome, title:'Kingdom Story' },
   worlds:{ r:renderHome, scroll:'worlds-sec', title:'Explore the Worlds' },
   visit:{ r:renderVisit, title:'Plan Your Visit' },
   join:{ r:renderVisit, scroll:'tickets', title:'Join the Launch List' },
@@ -1163,7 +1163,7 @@ function route() {
   $('#nav').classList.remove('open'); $('#menu-btn').setAttribute('aria-expanded','false');
   $$('[data-nav]').forEach(a => { NAVMAP[rk] === a.dataset.nav ? a.setAttribute('aria-current','page') : a.removeAttribute('aria-current'); });
   $$('[data-status]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.status === CONFIG.status)));
-  document.title = (rk==='home' ? '' : def.title + ' · ') + 'Kingdom Story Festival';
+  document.title = (rk==='home' ? '' : def.title + ' · ') + 'Kingdom Story';
   bindPage(rk);
   const target = def.scroll && $('#'+def.scroll);
   if (target) { target.scrollIntoView({ behavior: reduceMotion()?'auto':'smooth', block:'start' }); }
@@ -1218,7 +1218,7 @@ function renderFooter() {
     <div><strong style="color:var(--ink)">Explore</strong><ul><li><a href="#worlds">The seven worlds</a></li><li><a href="#visit">Plan your visit</a></li><li><a href="#authors">For authors</a></li><li><a href="#sponsors">For sponsors</a></li></ul></div>
     <div><strong style="color:var(--ink)">Policies</strong><ul><li>${lk(l.privacy,'Privacy')}</li><li>${lk(l.terms,'Terms')}</li><li>${lk(l.refunds,'Refunds')}</li><li>${lk(l.accessibility,'Accessibility')}</li></ul></div>
     <div><strong style="color:var(--ink)">Organizer notes</strong><ul><li><a href="#launch-kit">Launch kit</a></li><li><a href="#emails">Draft emails</a></li></ul><p style="margin-top:8px">Contact: ${esc(CONFIG.contact.email)}</p></div></div>
-    <div class="row" style="justify-content:space-between"><p class="small">A preview of a proposed event. Not a launched festival. Not affiliated with any theme park or technology brand.</p><button class="theme-btn" id="theme-btn" type="button">Toggle light / dark</button></div></div>`;
+    <div class="row" style="justify-content:space-between"><p class="small">A preview of a proposed event. Not a launched event. Not affiliated with any theme park or technology brand.</p><button class="theme-btn" id="theme-btn" type="button">Toggle light / dark</button></div></div>`;
   $('#theme-btn').onclick = () => { const r = document.documentElement; const dark = r.dataset.theme==='dark' || (!r.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches); r.dataset.theme = dark ? 'light' : 'dark'; };
 }
 
