@@ -33,7 +33,7 @@ html{scroll-padding-top:84px}
 body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--f-body);-webkit-font-smoothing:antialiased;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0;overflow-x:hidden}
 h1,h2,h3,h4{font-family:var(--f-display);font-variation-settings:"SOFT" 100;font-weight:500;line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
-h1{font-size:clamp(2.5rem,6.4vw,4.6rem);font-weight:450}
+h1{font-size:clamp(2.1rem,4.6vw,3.5rem);font-weight:450}
 h2{font-size:clamp(1.9rem,4vw,2.9rem)}
 h3{font-size:1.45rem}
 h4{font-size:1.15rem}
@@ -100,17 +100,20 @@ section.alt{background:var(--bg2);margin-inline:calc(-1*max(16px,env(safe-area-i
 
 /* hero */
 .hero{position:relative;margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));
-  background:linear-gradient(180deg,var(--sky-a),var(--sky-b));overflow:hidden;padding-block:clamp(40px,7vw,80px) 0}
+  background:linear-gradient(180deg,var(--sky-a),var(--sky-b));overflow:hidden;padding-block:clamp(16px,3vw,40px) 0}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}
-.hero-copy{display:grid;gap:22px;padding-bottom:clamp(40px,7vw,90px);position:relative;z-index:2;min-width:0}
+.hero-copy{display:grid;gap:20px;padding-bottom:clamp(40px,6vw,72px);position:relative;z-index:2;min-width:0}
 .hero-copy .promise{font:italic 400 clamp(1.4rem,3vw,2rem)/1.2 var(--f-display);font-variation-settings:"SOFT" 100;color:var(--gold-deep)}
 .tba{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:.95rem;color:var(--ink2)}
 .tba i{width:8px;height:8px;border-radius:50%;background:var(--gold)}
-.hero-art{position:relative;z-index:2;align-self:end;min-width:0}
-.hero-art svg{display:block;width:100%;height:auto;max-width:100%}
+.hero-art{position:relative;z-index:2;align-self:center;min-width:0}
+.hero-photo{margin:0;position:relative;padding-top:clamp(36px,6vw,56px);padding-bottom:clamp(28px,4vw,44px)}
+.hero-photo .lights{position:absolute;left:0;top:0;width:100%;height:auto;display:block}
+.hero-photo img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/3.4;object-fit:cover;object-position:56% 28%;border-radius:28px;border:6px solid var(--surface);box-shadow:0 24px 60px rgba(70,45,10,.28),0 0 0 2px var(--gold)}
+.hero-photo figcaption{position:absolute;left:18px;bottom:clamp(10px,2vw,22px);display:flex;gap:10px;align-items:center;background:color-mix(in srgb,var(--surface) 94%,transparent);color:var(--ink);padding:8px 16px 8px 8px;border-radius:999px;font-weight:600;font-size:.95rem;box-shadow:var(--shadow)}
 .hills{position:absolute;left:0;right:0;bottom:0;height:34%;z-index:1;pointer-events:none}
 .hills svg{width:100%;height:100%;display:block}
-@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero-art{max-width:520px;margin:0 auto}}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:0}.hero-art{order:-1;max-width:520px;margin:0 auto;width:100%}.hero-photo img{aspect-ratio:4/3}.hero-photo{padding-top:34px;padding-bottom:26px}}
 .orb{animation:float 7s ease-in-out infinite}
 .orb:nth-child(2n){animation-duration:9s;animation-delay:-3s}.orb:nth-child(3n){animation-duration:8s;animation-delay:-5s}
 @keyframes float{50%{transform:translateY(-10px)}}
@@ -683,19 +686,13 @@ function faq() {
    ============================================================ */
 function heroArt() {
   const cols = ['--w-faith','--w-family','--w-edu','--w-biz','--w-gov','--w-media','--w-arts'];
-  const flags = cols.map((c,i) => { const x = 40 + i*86; const y = 30 + Math.sin(i/6*Math.PI)*18; return `<g class="flag" style="transform-origin:${x}px ${y}px"><path d="M${x} ${y} l22 0 l-11 26z" fill="var(${c})"/></g>`; }).join('');
-  const orbs = cols.map((c,i) => { const ang = Math.PI*(1.12 + i*0.126); const cx = 300 + Math.cos(ang)*215, cy = 300 + Math.sin(ang)*190; return `<g class="orb"><circle cx="${cx}" cy="${cy}" r="26" fill="var(--glow)" opacity=".55"/><circle cx="${cx}" cy="${cy}" r="11" fill="var(${c})"/><circle cx="${cx-3}" cy="${cy-3}" r="3.2" fill="#fff" opacity=".8"/></g>`; }).join('');
-  return `<svg viewBox="0 0 600 470" role="img" aria-label="An open book with seven glowing lights rising from its pages, one for each story world">
-    <path d="M30 20 Q300 70 570 20" fill="none" stroke="var(--gold-deep)" stroke-width="1.5" opacity=".6"/>
-    ${flags}
-    <circle cx="300" cy="300" r="170" fill="var(--glow)" opacity=".35"/><circle cx="300" cy="300" r="110" fill="var(--glow)" opacity=".45"/>
-    ${orbs}
-    <path d="M300 410 L300 300 C250 270 160 270 70 300 L70 410 C160 385 250 390 300 410z" fill="var(--book)" stroke="var(--gold-deep)" stroke-width="2"/>
-    <path d="M300 410 L300 300 C350 270 440 270 530 300 L530 410 C440 385 350 390 300 410z" fill="var(--book)" stroke="var(--gold-deep)" stroke-width="2"/>
-    <g stroke="var(--gold-deep)" stroke-width="1.2" opacity=".35" fill="none"><path d="M95 330 C150 318 215 320 275 335"/><path d="M95 352 C150 340 215 342 275 357"/><path d="M95 374 C150 362 215 364 275 379"/><path d="M325 335 C385 320 450 318 505 330"/><path d="M325 357 C385 342 450 340 505 352"/><path d="M325 379 C385 364 450 362 505 374"/></g>
-    <path d="M300 300 L300 410" stroke="var(--gold)" stroke-width="4"/>
-    <ellipse cx="300" cy="428" rx="250" ry="14" fill="#000" opacity=".12"/>
-  </svg>`;
+  const P0=[10,78],P1=[300,-14],P2=[590,78];
+  const pt = t => [0,1].map(i => (1-t)*(1-t)*P0[i] + 2*(1-t)*t*P1[i] + t*t*P2[i]);
+  const flags = cols.map((c,i) => { const [x,y] = pt(0.08 + i*0.14); return `<g class="flag" style="transform-origin:${x}px ${y}px"><path d="M${x-12} ${y-2} h24 l-12 28z" fill="var(${c})"/></g>`; }).join('');
+  return `<figure class="hero-photo">
+    <svg class="lights" viewBox="0 0 600 100" aria-hidden="true"><path d="M10 78 Q300 -14 590 78" fill="none" stroke="var(--gold-deep)" stroke-width="1.5" opacity=".7"/>${flags}</svg>
+    <img src="img/organizers.jpg" width="1400" height="933" alt="Patricio and Daniella, the festival organizers, smiling side by side in a bright hotel lounge" fetchpriority="high">
+    <figcaption><span class="tag" style="background:var(--surface)">Your hosts</span> Patricio and Daniella</figcaption></figure>`;
 }
 function hills() {
   return `<div class="hills" aria-hidden="true"><svg viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0 110 C200 40 380 120 600 70 S1000 40 1200 100 V200 H0z" fill="var(--hill-a)"/><path d="M0 150 C220 100 420 170 650 130 S1020 110 1200 150 V200 H0z" fill="var(--hill-b)"/><path d="M0 185 C300 160 520 200 760 175 S1060 165 1200 188 V200 H0z" fill="var(--hill-c)"/></svg></div>`;
@@ -721,8 +718,8 @@ function renderHome() {
     <div class="wrap">
       <div class="hero-copy">
         <span class="eyebrow">Kingdom Story Festival</span>
-        <h1 id="h1">Where Books<br>Come to Life.</h1>
-        <p class="promise">Seven Worlds. Countless Stories. One King.</p>
+        <h1 id="h1">What if your favorite book walked off the page?</h1>
+        <p class="promise">Where Books Come to Life.</p>
         <p class="lede" style="color:var(--ink)">Step into seven story worlds filled with faith, imagination, courage, and purpose. Meet the authors, discover the books, and begin a story of your own.</p>
         <div class="row">
           <a class="btn btn-gold" href="#join" data-cta="hero">${cta}</a>
@@ -805,7 +802,6 @@ function renderHome() {
 }
 function purposeSection() {
   return `<section class="s" id="purpose" aria-labelledby="pp-h"><div class="wrap two">
-    <figure class="portrait"><img src="img/organizers.jpg" width="1400" height="933" alt="Patricio and Daniella standing side by side with arms crossed, smiling, in a bright hotel lounge" loading="lazy"><figcaption>Patricio and Daniella, organizers</figcaption></figure>
     <div class="sh" style="margin:0"><span class="eyebrow">Purpose and organizers</span><h2 id="pp-h">Stories strengthen faith, connect generations, develop gifts, and inspire service.</h2></div>
     <div style="display:grid;gap:16px">
       <p>The festival is a public, reader-and-family experience, rooted in the belief that a well-told story can help a person see God, a family, and a neighbor more clearly.</p>
